@@ -1,0 +1,125 @@
+.modal-toolbar {
+  --background: #111d35;
+  --color: #ffffff;
+  ion-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+}
+
+.modal-content {
+  --background: #0b1329;
+  color: #ffffff;
+}
+
+.transfer-box {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-info-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px;
+  .label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+  }
+  h3 {
+    margin: 4px 0 2px 0;
+    font-size: 1.1rem;
+    color: #38b6ff;
+  }
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+  }
+}
+
+.icon-divider {
+  text-align: center;
+  ion-icon {
+    font-size: 24px;
+    color: #38b6ff;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  label {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+  }
+}
+
+.card-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-option {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.selected {
+    border-color: #38b6ff;
+    background: rgba(56, 182, 255, 0.1);
+  }
+
+  .option-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    .option-title {
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .option-number {
+      color: #94a3b8;
+    }
+  }
+}
+
+.custom-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+
+  &:focus {
+    border-color: #38b6ff;
+  }
+}
+
+.btn-primary {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  background: #38b6ff;
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:active {
+    background: #0090e0;
+  }
+}

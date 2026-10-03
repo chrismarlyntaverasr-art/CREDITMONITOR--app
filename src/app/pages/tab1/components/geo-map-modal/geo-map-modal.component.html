@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Red de Sucursales y GPS</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ubicación en Tiempo Real</ion-card-title>
+      <ion-card-subtitle>CreditMonitor Geolocalización</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Localiza sucursales cercanas y verifica tu punto de acceso actual.</p>
+      
+      <ion-button expand="block" (click)="obtenerUbicacionGPS()" class="ion-margin-top">
+        <ion-icon name="locate-outline" slot="start"></ion-icon>
+        Centrar en mi ubicación GPS
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Contenedor donde Leaflet renderizará el mapa -->
+  <div id="map" class="map-container"></div>
+</ion-content>

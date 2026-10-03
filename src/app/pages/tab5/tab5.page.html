@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Perfil de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="person-outline"></ion-icon> Datos Personales
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-label position="stacked">Nombre Completo</ion-label>
+        <ion-input [(ngModel)]="user.fullName" name="fullName" ngDefaultControl></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="stacked">Correo Electrónico</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" name="email" ngDefaultControl></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="stacked">Teléfono</ion-label>
+        <ion-input type="tel" [(ngModel)]="user.phone" name="phone" ngDefaultControl></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Banco Principal Asociado</ion-label>
+        <ion-select [(ngModel)]="user.associatedBank" name="associatedBank" interface="action-sheet" ngDefaultControl>
+          @for (bank of banks; track bank) {
+            <ion-select-option [value]="bank">{{ bank }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" class="ion-margin-top" (click)="saveProfile()">
+        Guardar Cambios
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

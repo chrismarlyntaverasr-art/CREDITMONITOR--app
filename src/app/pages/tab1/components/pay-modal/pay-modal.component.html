@@ -1,0 +1,91 @@
+<ion-header class="modal-header ion-no-border">
+  <ion-toolbar class="modal-toolbar">
+    <ion-title class="modal-title">
+      <ion-icon name="wallet-outline" class="header-icon"></ion-icon>
+      Realizar Pago
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="close-btn" (click)="closeModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content ion-padding">
+  @if (card) {
+    <!-- Tarjeta Visual Destacada -->
+    <div class="card-summary" [ngClass]="card.colorClass || 'card-gold'">
+      <div class="card-top">
+        <span class="card-brand">{{ card.type || 'VISA' }}</span>
+        <ion-icon name="wifi-outline" class="wifi-icon"></ion-icon>
+      </div>
+      
+      <div class="card-number">{{ card.cardNumber || '•••• ****' }}</div>
+      
+      <div class="card-details">
+        <div class="detail-item">
+          <span class="label">Tarjeta</span>
+          <span class="value">{{ card.cardName }}</span>
+        </div>
+        <div class="detail-item text-right">
+          <span class="label">Saldo Pendiente</span>
+          <span class="value amount">${{ card.balance | number:'1.2-2' }}</span>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Formulario de Pago Interactivo -->
+  <div class="payment-section">
+    <label class="input-label">Monto a abonar ($)</label>
+    
+    <div class="input-wrapper">
+      <span class="currency-symbol">$</span>
+      <input 
+        type="number" 
+        name="paymentAmount" 
+        [(ngModel)]="paymentAmount" 
+        placeholder="0.00"
+        class="custom-amount-input"
+        min="0.01"
+      />
+    </div>
+
+    <!-- Opciones de Selección Rápida -->
+    <span class="quick-title">Opciones de pago rápido</span>
+    <div class="quick-options">
+      <button type="button" class="chip-btn" (click)="setPercentage(25)">
+        25%
+      </button>
+      <button type="button" class="chip-btn" (click)="setPercentage(50)">
+        50%
+      </button>
+      <button type="button" class="chip-btn" (click)="setPercentage(75)">
+        75%
+      </button>
+      <button type="button" class="chip-btn highlight" (click)="setAmount(card?.balance)">
+        Total
+      </button>
+    </div>
+
+    <!-- Resumen Dinámico del Nuevo Saldo -->
+    @if (paymentAmount > 0) {
+      <div class="balance-preview">
+        <span class="preview-label">Nuevo saldo pendiente:</span>
+        <strong class="preview-amount">${{ getNewBalance() | number:'1.2-2' }}</strong>
+      </div>
+    }
+
+    <!-- Botón Principal -->
+    <ion-button 
+      expand="block" 
+      class="pay-submit-btn" 
+      (click)="confirmPayment()" 
+      [disabled]="!paymentAmount || paymentAmount <= 0"
+    >
+      Confirmar Pago
+      <ion-icon name="checkmark-circle-outline" slot="end"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>

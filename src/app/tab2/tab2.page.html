@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Deudas Actuales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Resumen General -->
+  <ion-card color="danger">
+    <ion-card-content class="ion-text-center">
+      <h2>Total Deuda Acumulada</h2>
+      <h1 style="font-weight: bold;">RD$ {{ getTotalDebtOverall() | number:'1.2-2' }}</h1>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista por Bancos -->
+  @for (bank of bankDebts; track bank.bankName) {
+    <div class="ion-margin-bottom">
+      <ion-card>
+        <ion-card-header [style.backgroundColor]="bank.logoColor" style="color: white;">
+          <ion-card-title style="color: white; font-size: 1.1rem;">
+            <ion-icon name="business-outline"></ion-icon> {{ bank.bankName }}
+          </ion-card-title>
+          <ion-card-subtitle style="color: #e0e0e0;">
+            Deuda Total: RD$ {{ bank.totalDebt | number:'1.2-2' }}
+          </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <!-- Préstamos del Banco -->
+          @if (bank.loans.length > 0) {
+            <ion-list-header>
+              <ion-label color="secondary">Préstamos Activos</ion-label>
+            </ion-list-header>
+            @for (loan of bank.loans; track loan.title) {
+              <ion-item>
+                <ion-icon name="cash-outline" slot="start" color="warning"></ion-icon>
+                <ion-label>
+                  <h2>{{ loan.title }}</h2>
+                  <p>Cuota mensual: RD$ {{ loan.monthlyPayment | number:'1.2-2' }}</p>
+                </ion-label>
+                <ion-note slot="end" color="danger">RD$ {{ loan.amount | number:'1.2-2' }}</ion-note>
+              </ion-item>
+            }
+          }
+
+          <!-- Tarjetas del Banco -->
+          @if (bank.cards.length > 0) {
+            <ion-list-header>
+              <ion-label color="secondary">Tarjetas de Crédito</ion-label>
+            </ion-list-header>
+            @for (card of bank.cards; track card.number) {
+              <ion-item>
+                <ion-icon name="card-outline" slot="start" color="primary"></ion-icon>
+                <ion-label>
+                  <h2>{{ card.name }}</h2>
+                  <p>{{ card.number }}</p>
+                </ion-label>
+                <ion-note slot="end" color="danger">RD$ {{ card.debt | number:'1.2-2' }}</ion-note>
+              </ion-item>
+            }
+          }
+        </ion-card-content>
+      </ion-card>
+    </div>
+  }
+</ion-content>

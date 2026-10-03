@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-title>Salud Financiera</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Tarjeta de Puntaje Principal -->
+  <div class="score-card">
+    <span class="score-title">Índice de Salud Financiera</span>
+    <div class="score-circle">
+      <h2>{{ financialScore }}</h2>
+      <span>/ 100</span>
+    </div>
+    <p class="score-status">
+      @if (financialScore >= 80) {
+        <span>Excelente control financiero</span>
+      } @else if (financialScore >= 60) {
+        <span>Buen estado, con margen de mejora</span>
+      } @else {
+        <span>Requiere atención inmediata</span>
+      }
+    </p>
+  </div>
+
+  <!-- Métricas de Evaluación -->
+  <div class="section-title">Diagnóstico por Criterios</div>
+  
+  @for (metric of metrics; track metric.title) {
+    <div class="metric-card">
+      <div class="metric-header">
+        <ion-icon [name]="metric.icon" class="metric-icon"></ion-icon>
+        <div class="metric-info">
+          <h4>{{ metric.title }}</h4>
+          <span class="status-badge" [class]="metric.color">{{ metric.status }}</span>
+        </div>
+        <div class="metric-score">{{ metric.score }}</div>
+      </div>
+    </div>
+  }
+
+  <!-- Recomendaciones / Consejos -->
+  <div class="section-title">Recomendaciones para mejorar</div>
+
+  <div class="tips-container">
+    @for (tip of tips; track tip) {
+      <div class="tip-item">
+        <ion-icon name="checkmark-circle-outline" class="tip-icon"></ion-icon>
+        <p>{{ tip }}</p>
+      </div>
+    }
+  </div>
+
+</ion-content>

@@ -1,0 +1,83 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Simulador de Crédito</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="simulator-container">
+    
+    <!-- Resultado principal: Cuota mensual -->
+    <div class="result-card">
+      <span class="result-label">CUOTA MENSUAL ESTIMADA</span>
+      <h1 class="result-amount">DOP ${{ monthlyPayment | number:'1.2-2' }}</h1>
+    </div>
+
+    <!-- Controles de Simulación -->
+    <div class="control-group">
+      <div class="label-row">
+        <span>Monto del Préstamo</span>
+        <strong>DOP ${{ amount | number }}</strong>
+      </div>
+      <input 
+        type="range" 
+        name="amount" 
+        min="10000" 
+        max="500000" 
+        step="5000" 
+        [(ngModel)]="amount" 
+        class="custom-slider" 
+      />
+    </div>
+
+    <div class="control-group">
+      <div class="label-row">
+        <span>Plazo de Pago</span>
+        <strong>{{ termMonths }} Meses</strong>
+      </div>
+      <input 
+        type="range" 
+        name="termMonths" 
+        min="6" 
+        max="60" 
+        step="6" 
+        [(ngModel)]="termMonths" 
+        class="custom-slider" 
+      />
+    </div>
+
+    <div class="control-group">
+      <div class="label-row">
+        <span>Tasa de Interés Anual</span>
+        <strong>{{ annualInterestRate }}%</strong>
+      </div>
+      <input 
+        type="range" 
+        name="annualInterestRate" 
+        min="8" 
+        max="36" 
+        step="1" 
+        [(ngModel)]="annualInterestRate" 
+        class="custom-slider" 
+      />
+    </div>
+
+    <!-- Desglose resumido -->
+    <div class="summary-card">
+      <div class="summary-row">
+        <span>Total Intereses:</span>
+        <strong>DOP ${{ totalInterest | number:'1.2-2' }}</strong>
+      </div>
+      <div class="summary-row">
+        <span>Monto Total a Pagar:</span>
+        <strong>DOP ${{ totalAmountToPay | number:'1.2-2' }}</strong>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

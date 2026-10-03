@@ -1,0 +1,170 @@
+$accent-blue: #38b6ff;
+$accent-green: #00e676;
+$accent-orange: #ff9f43;
+
+.modal-toolbar {
+  --background: #111d35;
+  --color: #ffffff;
+  padding: 6px 12px;
+
+  .modal-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .header-icon {
+      color: $accent-blue;
+      font-size: 1.3rem;
+    }
+  }
+
+  .close-btn {
+    --color: #94a3b8;
+  }
+}
+
+.modal-content {
+  --background: #111d35;
+  color: #ffffff;
+}
+
+.card-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+
+  .card-type {
+    font-size: 0.75rem;
+    color: $accent-blue;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    margin: 4px 0 2px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .card-number {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+
+  .period-badge {
+    background: rgba(56, 182, 255, 0.15);
+    color: $accent-blue;
+    border: 1px solid rgba(56, 182, 255, 0.3);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  .metric-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .metric-sub {
+      font-size: 0.7rem;
+      margin-top: 6px;
+      opacity: 0.8;
+    }
+
+    &.primary {
+      border: 1px solid rgba(56, 182, 255, 0.3);
+      .metric-value { color: $accent-blue; }
+      .metric-sub { color: #94a3b8; }
+    }
+
+    &.warning {
+      border: 1px solid rgba(255, 159, 67, 0.3);
+      .metric-value { color: $accent-orange; }
+      .metric-sub { color: $accent-orange; }
+    }
+  }
+}
+
+.details-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 24px;
+
+  .details-title {
+    margin: 0 0 14px 0;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+  }
+
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+    color: #94a3b8;
+
+    strong {
+      color: #ffffff;
+    }
+
+    &.success-text strong {
+      color: $accent-green;
+    }
+
+    &.total-item {
+      margin-bottom: 0;
+      font-size: 1rem;
+      color: #ffffff;
+      
+      .total-value {
+        color: $accent-blue;
+        font-size: 1.15rem;
+      }
+    }
+  }
+
+  .divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 12px 0;
+  }
+}
+
+.download-btn {
+  --background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+  --border-radius: 12px;
+  font-weight: 700;
+  height: 48px;
+}

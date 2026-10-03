@@ -1,0 +1,88 @@
+:host {
+  display: block;
+  height: 100%;
+  background-color: #090d16;
+}
+
+ion-header ion-toolbar {
+  --background: #0f172a;
+  --color: #ffffff;
+  ion-button { --color: #38bdf8; }
+}
+
+ion-content {
+  --background: #090d16;
+  --color: #ffffff;
+}
+
+.simulator-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  
+  .result-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .result-amount {
+    color: #38bdf8;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 8px 0 0;
+  }
+}
+
+.control-group {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin-bottom: 12px;
+
+    strong {
+      color: #38bdf8;
+    }
+  }
+
+  .custom-slider {
+    width: 100%;
+    accent-color: #38bdf8;
+  }
+}
+
+.summary-card {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #94a3b8;
+
+    strong {
+      color: #f8fafc;
+    }
+  }
+}

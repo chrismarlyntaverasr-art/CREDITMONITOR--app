@@ -1,0 +1,170 @@
+/* Colores exactos extraídos de la captura original */
+$bg-main: #183754;
+$input-bg: #224263;
+$input-border: #2c4d70;
+$cyan-btn: #00a2ed;
+$orange-text: #f08218;
+
+ion-header.ion-no-border ion-toolbar.custom-toolbar {
+  --background: #{$bg-main};
+  --border-width: 0;
+
+  ion-button {
+    --color: #38bdf8;
+    font-size: 1.2rem;
+  }
+}
+
+ion-content.custom-content {
+  --background: #{$bg-main};
+  --color: #ffffff;
+}
+
+.login-container {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15px;
+}
+
+/* Header & Escudo */
+.brand-header {
+  text-align: center;
+  margin-bottom: 28px;
+  width: 100%;
+
+  .shield-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: #f08218;
+    border-radius: 16px;
+    margin-bottom: 12px;
+
+    ion-icon {
+      font-size: 2.3rem;
+      color: #183754;
+    }
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.5px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #8fa7be;
+    margin: 0;
+  }
+}
+
+/* Formularios */
+.form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .input-box {
+    background: $input-bg;
+    border: 1px solid $input-border;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    ion-icon {
+      font-size: 1.25rem;
+      color: #38bdf8;
+    }
+
+    input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      width: 100%;
+      font-size: 0.95rem;
+
+      &::placeholder {
+        color: #557596;
+      }
+    }
+
+    .eye-toggle {
+      color: #557596;
+      cursor: pointer;
+    }
+  }
+}
+
+.forgot-link {
+  text-align: right;
+
+  a {
+    color: #38bdf8;
+    font-size: 0.85rem;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Botón Cian Ancho */
+.btn-cyan {
+  width: 100%;
+  background: $cyan-btn;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.2s ease;
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+/* Footer enlace */
+.footer-register {
+  text-align: center;
+  font-size: 0.88rem;
+  color: #ffffff;
+  margin-top: 12px;
+
+  a {
+    color: $orange-text;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

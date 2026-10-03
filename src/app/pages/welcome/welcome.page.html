@@ -1,0 +1,241 @@
+<ion-content class="welcome-container">
+  <div class="welcome-wrapper">
+
+    <!-- Barra Superior -->
+    <div class="top-bar">
+      <ion-icon name="arrow-back-outline" class="back-icon"></ion-icon>
+    </div>
+
+    <!-- Marca e Isotipo -->
+    <div class="brand-header">
+      <div class="shield-badge">
+        <ion-icon name="shield-checkmark"></ion-icon>
+      </div>
+      <h1 class="brand-title">CreditMonitor</h1>
+      <p class="brand-subtitle">Bienvenido a tu</p>
+      <h2 class="app-title">App CreditMonitor</h2>
+    </div>
+
+    <!-- Menú de Accesos Rápidos Inferior -->
+    <div class="quick-access">
+      <!-- Opción 1: Centro de Información -->
+      <div class="access-item" (click)="openInfoCenter()">
+        <ion-icon name="book-outline"></ion-icon>
+        <span>Centro de Información</span>
+      </div>
+
+      <!-- Opción 2: Simulador de Crédito -->
+      <div class="access-item" (click)="openCreditSimulator()">
+        <ion-icon name="calculator-outline"></ion-icon>
+        <span>Simulador de Crédito</span>
+      </div>
+
+      <!-- Opción 3: Salud Financiera -->
+      <div class="access-item" (click)="openFinancialHealth()">
+        <ion-icon name="pulse-outline"></ion-icon>
+        <span>Salud Financiera</span>
+      </div>
+    </div>
+
+    <!-- Botón Principal Acceder -->
+    <ion-button expand="block" class="access-btn" (click)="irALogin()">
+      ACCEDER
+    </ion-button>
+
+  </div>
+
+  <!-- MODAL 1: CATÁLOGO DE TARJETAS DISPONIBLES -->
+  <ion-modal [isOpen]="modalTarjetasAbierto" (didDismiss)="cerrarModalTarjetas()">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar class="modal-toolbar">
+          <ion-title>Tarjetas Disponibles</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModalTarjetas()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-cards-content">
+        <div class="cards-intro">
+          <h2>Elige tu tarjeta ideal</h2>
+          <p>Selecciona la tarjeta que mejor se adapte a ti y solicítala al instante.</p>
+        </div>
+
+        <div class="cards-list">
+
+          <!-- 1. Gold -->
+          <div class="card-item gold-theme">
+            <div class="card-badge">Turismo & Ofertas</div>
+            <div class="credit-card">
+              <div class="card-top">
+                <div class="brand-logo">
+                  <ion-icon name="shield-checkmark"></ion-icon>
+                  <span>CreditMonitor</span>
+                </div>
+                <span class="card-tier">GOLD</span>
+              </div>
+              <div class="card-middle">
+                <div class="chip"></div>
+                <ion-icon name="wifi-outline" class="contactless"></ion-icon>
+              </div>
+              <div class="card-bottom">
+                <span class="card-number">•••• •••• •••• 8842</span>
+                <div class="card-brand-logo">VISA</div>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>CreditMonitor Gold Tourism</h3>
+              <p>10% de cashback en hoteles, boletos y viajes turísticos.</p>
+              <ion-button expand="block" class="request-btn" (click)="abrirSolicitud('CreditMonitor Gold Tourism')">
+                SOLICITAR
+              </ion-button>
+            </div>
+          </div>
+
+          <!-- 2. Clásica -->
+          <div class="card-item classic-theme">
+            <div class="card-badge">Shopping & Compras</div>
+            <div class="credit-card">
+              <div class="card-top">
+                <div class="brand-logo">
+                  <ion-icon name="shield-checkmark"></ion-icon>
+                  <span>CreditMonitor</span>
+                </div>
+                <span class="card-tier">CLÁSICA</span>
+              </div>
+              <div class="card-middle">
+                <div class="chip"></div>
+                <ion-icon name="wifi-outline" class="contactless"></ion-icon>
+              </div>
+              <div class="card-bottom">
+                <span class="card-number">•••• •••• •••• 3190</span>
+                <div class="card-brand-logo">VISA</div>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>CreditMonitor Shopping Classic</h3>
+              <p>Cuotas sin interés en tiendas departamentales y compras generales.</p>
+              <ion-button expand="block" class="request-btn" (click)="abrirSolicitud('CreditMonitor Shopping Classic')">
+                SOLICITAR
+              </ion-button>
+            </div>
+          </div>
+
+          <!-- 3. Platinum -->
+          <div class="card-item platinum-theme">
+            <div class="card-badge">Salud & Bienestar</div>
+            <div class="credit-card">
+              <div class="card-top">
+                <div class="brand-logo">
+                  <ion-icon name="shield-checkmark"></ion-icon>
+                  <span>CreditMonitor</span>
+                </div>
+                <span class="card-tier">PLATINUM</span>
+              </div>
+              <div class="card-middle">
+                <div class="chip"></div>
+                <ion-icon name="wifi-outline" class="contactless"></ion-icon>
+              </div>
+              <div class="card-bottom">
+                <span class="card-number">•••• •••• •••• 5512</span>
+                <div class="card-brand-logo">Mastercard</div>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>CreditMonitor Health & Beauty</h3>
+              <p>Descuentos especiales en clínicas, spas, farmacias y estética.</p>
+              <ion-button expand="block" class="request-btn" (click)="abrirSolicitud('CreditMonitor Health & Beauty')">
+                SOLICITAR
+              </ion-button>
+            </div>
+          </div>
+
+          <!-- 4. Black -->
+          <div class="card-item black-theme">
+            <div class="card-badge">Viajes VIP</div>
+            <div class="credit-card">
+              <div class="card-top">
+                <div class="brand-logo">
+                  <ion-icon name="shield-checkmark"></ion-icon>
+                  <span>CreditMonitor</span>
+                </div>
+                <span class="card-tier">BLACK</span>
+              </div>
+              <div class="card-middle">
+                <div class="chip"></div>
+                <ion-icon name="wifi-outline" class="contactless"></ion-icon>
+              </div>
+              <div class="card-bottom">
+                <span class="card-number">•••• •••• •••• 9901</span>
+                <div class="card-brand-logo">Mastercard</div>
+              </div>
+            </div>
+            <div class="card-info">
+              <h3>CreditMonitor Black VIP</h3>
+              <p>Acceso ilimitado a Salas VIP de aeropuertos y seguro de viaje global.</p>
+              <ion-button expand="block" class="request-btn" (click)="abrirSolicitud('CreditMonitor Black VIP')">
+                SOLICITAR
+              </ion-button>
+            </div>
+          </div>
+
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- MODAL 2: FORMULARIO DE SOLICITUD -->
+  <ion-modal [isOpen]="modalSolicitudAbierto" (didDismiss)="cerrarModalSolicitud()">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar class="modal-toolbar">
+          <ion-title>Solicitud de Tarjeta</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarModalSolicitud()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-form-content">
+        <div class="form-wrapper">
+          <div class="form-header">
+            <ion-icon name="card-outline" class="form-icon"></ion-icon>
+            <h3>Estás solicitando: <br><span>{{ tarjetaSeleccionada }}</span></h3>
+          </div>
+
+          <form (submit)="enviarSolicitud($event)">
+            <div class="form-group">
+              <label>Nombre Completo</label>
+              <input type="text" placeholder="Ej: Juan Pérez" required />
+            </div>
+
+            <div class="form-group">
+              <label>Cédula o Documento de Identidad</label>
+              <input type="text" placeholder="Ej: 001-0000000-0" required />
+            </div>
+
+            <div class="form-group">
+              <label>Ingreso Mensual Estimado (DOP)</label>
+              <input type="number" placeholder="Ej: 50000" required />
+            </div>
+
+            <div class="form-group">
+              <label>Correo Electrónico</label>
+              <input type="email" placeholder="correo@ejemplo.com" required />
+            </div>
+
+            <ion-button expand="block" type="submit" class="submit-btn">
+              ENVIAR SOLICITUD
+            </ion-button>
+          </form>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="modal-toolbar">
+    <ion-title>Transferir Fondos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-content">
+  <div class="transfer-box">
+
+    <!-- Tarjeta de Origen -->
+    <div class="card-info-box">
+      <span class="label">Desde:</span>
+      <h3>{{ sourceCard?.cardName }}</h3>
+      <p>{{ sourceCard?.cardNumber }}</p>
+    </div>
+
+    <div class="icon-divider">
+      <ion-icon name="swap-horizontal-outline"></ion-icon>
+    </div>
+
+    <!-- Selección de Tarjeta de Destino -->
+    <div class="form-group">
+      <label>Hacia la tarjeta/cuenta:</label>
+
+      <div class="card-options">
+        @for (card of availableCards; track card.id) {
+          <div 
+            class="card-option" 
+            [class.selected]="targetCardId === card.id"
+            (click)="targetCardId = card.id"
+          >
+            <div class="option-header">
+              <span class="option-title">{{ card.cardName }}</span>
+              <span class="option-number">{{ card.cardNumber }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Input Monto -->
+    <div class="form-group">
+      <label for="amount">Monto a Transferir ($):</label>
+      <input 
+        id="amount" 
+        type="number" 
+        [(ngModel)]="transferAmount" 
+        placeholder="0.00" 
+        min="1" 
+        class="custom-input"
+      />
+    </div>
+
+    <!-- Input Nota opcional -->
+    <div class="form-group">
+      <label for="note">Nota (Opcional):</label>
+      <input 
+        id="note" 
+        type="text" 
+        [(ngModel)]="transferNote" 
+        placeholder="Ej. Pago de saldo" 
+        class="custom-input"
+      />
+    </div>
+
+    <!-- Botón Confirmar -->
+    <button class="btn-primary" (click)="processTransfer()">
+      Confirmar Transferencia
+    </button>
+
+  </div>
+</ion-content>

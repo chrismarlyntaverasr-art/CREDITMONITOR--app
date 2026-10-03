@@ -1,0 +1,335 @@
+ion-content.welcome-container {
+  --background: #1b4266;
+
+  .welcome-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1.5rem 1.2rem;
+    box-sizing: border-box;
+    color: #ffffff;
+  }
+
+  .top-bar {
+    .back-icon {
+      font-size: 1.6rem;
+      color: #7bb1d9;
+      cursor: pointer;
+    }
+  }
+
+  .brand-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .shield-badge {
+      font-size: 4rem;
+      color: #e08b2b;
+      margin-bottom: 0.5rem;
+      ion-icon {
+        filter: drop-shadow(-2px 0px 0px #00a2e8);
+      }
+    }
+
+    .brand-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .brand-subtitle {
+      font-size: 1.2rem;
+      color: #00a2e8;
+      margin: 1.5rem 0 0.2rem 0;
+      font-weight: 600;
+    }
+
+    .app-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #e08b2b;
+      margin: 0;
+    }
+  }
+
+  .quick-access {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+
+    .access-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      width: 30%;
+      text-align: center;
+
+      ion-icon {
+        font-size: 2.2rem;
+        color: #38b6ff;
+      }
+
+      span {
+        font-size: 0.8rem;
+        color: #cbdbe8;
+        font-weight: 500;
+        line-height: 1.1;
+      }
+
+      &:active {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .access-btn {
+    --background: #00a2e8;
+    --color: #ffffff;
+    --border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    height: 52px;
+  }
+}
+
+/* ESTILOS DE MODALES Y CATÁLOGO DE TARJETAS */
+.modal-toolbar {
+  --background: #1b4266;
+  --color: #ffffff;
+  ion-icon {
+    font-size: 1.5rem;
+    color: #38b6ff;
+  }
+}
+
+.modal-cards-content {
+  --background: #1b4266;
+
+  .cards-intro {
+    padding: 1rem 1.2rem 0.5rem 1.2rem;
+    color: #ffffff;
+
+    h2 {
+      margin: 0;
+      color: #38b6ff;
+      font-weight: 800;
+      font-size: 1.4rem;
+    }
+
+    p {
+      color: #cbdbe8;
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0 0;
+    }
+  }
+
+  .cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 1.2rem 2rem 1.2rem;
+
+    .card-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+
+      .card-badge {
+        align-self: flex-start;
+        background: rgba(224, 139, 43, 0.2);
+        color: #e08b2b;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 10px;
+        text-transform: uppercase;
+      }
+
+      .credit-card {
+        width: 100%;
+        height: 185px;
+        border-radius: 16px;
+        padding: 1.2rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #ffffff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+
+        .card-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+          }
+
+          .card-tier {
+            font-size: 0.8rem;
+            font-weight: 800;
+          }
+        }
+
+        .card-middle {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .chip {
+            width: 38px;
+            height: 28px;
+            background: linear-gradient(135deg, #e6c875, #b8860b);
+            border-radius: 5px;
+          }
+
+          .contactless {
+            font-size: 1.2rem;
+            transform: rotate(90deg);
+          }
+        }
+
+        .card-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+
+          .card-number {
+            font-family: monospace;
+            font-size: 1rem;
+          }
+
+          .card-brand-logo {
+            font-weight: 800;
+            font-style: italic;
+          }
+        }
+      }
+
+      /* Colores para las tarjetas */
+      &.gold-theme .credit-card { 
+        background: linear-gradient(135deg, #d4af37, #aa7c11); 
+      }
+      &.classic-theme .credit-card { 
+        background: linear-gradient(135deg, #0d3b66, #001f3f); 
+        border: 1px solid rgba(255,255,255,0.1); 
+      }
+      &.platinum-theme .credit-card { 
+        background: linear-gradient(135deg, #8a9ea7, #4a5a63); 
+      }
+      &.black-theme .credit-card { 
+        background: linear-gradient(135deg, #222222, #050505); 
+        border: 1px solid rgba(255,255,255,0.2); 
+      }
+
+      .card-info {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        border-radius: 12px;
+
+        h3 {
+          margin: 0;
+          font-size: 1rem;
+          color: #ffffff;
+          font-weight: 700;
+        }
+
+        p {
+          font-size: 0.82rem;
+          color: #cbdbe8;
+          margin: 0.4rem 0 0.8rem 0;
+        }
+
+        .request-btn {
+          --background: #00a2e8;
+          --color: #ffffff;
+          --border-radius: 10px;
+          font-weight: 700;
+          height: 44px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+/* FORMULARIO DE SOLICITUD */
+.modal-form-content {
+  --background: #1b4266;
+
+  .form-wrapper {
+    padding: 1.5rem 1.2rem;
+    color: #ffffff;
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+
+      .form-icon {
+        font-size: 3rem;
+        color: #e08b2b;
+      }
+
+      h3 {
+        margin: 0.5rem 0 0 0;
+        font-size: 1rem;
+
+        span {
+          color: #38b6ff;
+          font-weight: 700;
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+
+        label {
+          font-size: 0.85rem;
+          color: #cbdbe8;
+        }
+
+        input {
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+          padding: 0 1rem;
+          height: 48px;
+          color: #ffffff;
+          outline: none;
+
+          &:focus {
+            border-color: #00a2e8;
+          }
+        }
+      }
+
+      .submit-btn {
+        --background: #e08b2b;
+        --color: #ffffff;
+        --border-radius: 10px;
+        font-weight: 700;
+        height: 50px;
+        margin-top: 1rem;
+      }
+    }
+  }
+}
