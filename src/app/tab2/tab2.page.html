@@ -1,67 +1,199 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Deudas Actuales</ion-title>
+  <ion-toolbar class="custom-toolbar">
+    <div class="brand-header">
+      <div class="brand-logo">
+        <ion-icon name="wallet-outline"></ion-icon>
+        <span class="brand-name">Credit<span>Monitor</span></span>
+      </div>
+      <p class="page-title">Mis Deudas</p>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Resumen General -->
-  <ion-card color="danger">
-    <ion-card-content class="ion-text-center">
-      <h2>Total Deuda Acumulada</h2>
-      <h1 style="font-weight: bold;">RD$ {{ getTotalDebtOverall() | number:'1.2-2' }}</h1>
+  <ion-refresher slot="fixed" (ionRefresh)="refrescar($event)">
+    <ion-refresher-content pullingText="Desliza para actualizar"></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="total-summary-card">
+    <ion-card-content>
+      <p class="summary-label">Deuda total registrada</p>
+      <h1 class="summary-amount">RD$ {{ totalDeuda | number:'1.2-2' }}</h1>
+      <p class="summary-secondary">
+        Cuotas mensuales: RD$ {{ totalCuotasMensuales | number:'1.2-2' }}
+      </p>
     </ion-card-content>
   </ion-card>
 
-  <!-- Lista por Bancos -->
-  @for (bank of bankDebts; track bank.bankName) {
-    <div class="ion-margin-bottom">
-      <ion-card>
-        <ion-card-header [style.backgroundColor]="bank.logoColor" style="color: white;">
-          <ion-card-title style="color: white; font-size: 1.1rem;">
-            <ion-icon name="business-outline"></ion-icon> {{ bank.bankName }}
-          </ion-card-title>
-          <ion-card-subtitle style="color: #e0e0e0;">
-            Deuda Total: RD$ {{ bank.totalDebt | number:'1.2-2' }}
-          </ion-card-subtitle>
-        </ion-card-header>
+  <ion-button
+    expand="block"
+    shape="round"
+    class="add-button"
+    (click)="nuevaDeuda()"
+    *ngIf="!mostrarFormulario"
+  >
+    <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+    Agregar deuda
+  </ion-button>
 
-        <ion-card-content>
-          <!-- Préstamos del Banco -->
-          @if (bank.loans.length > 0) {
-            <ion-list-header>
-              <ion-label color="secondary">Préstamos Activos</ion-label>
-            </ion-list-header>
-            @for (loan of bank.loans; track loan.title) {
-              <ion-item>
-                <ion-icon name="cash-outline" slot="start" color="warning"></ion-icon>
-                <ion-label>
-                  <h2>{{ loan.title }}</h2>
-                  <p>Cuota mensual: RD$ {{ loan.monthlyPayment | number:'1.2-2' }}</p>
-                </ion-label>
-                <ion-note slot="end" color="danger">RD$ {{ loan.amount | number:'1.2-2' }}</ion-note>
-              </ion-item>
-            }
-          }
+  <ion-card class="form-card" *ngIf="mostrarFormulario">
+    <ion-card-header>
+      <ion-card-title>
+        {{ editandoId ? 'Editar deuda' : 'Nueva deuda' }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        Los datos se guardan localmente con Ionic Storage.
+      </ion-card-subtitle>
+    </ion-card-header>
 
-          <!-- Tarjetas del Banco -->
-          @if (bank.cards.length > 0) {
-            <ion-list-header>
-              <ion-label color="secondary">Tarjetas de Crédito</ion-label>
-            </ion-list-header>
-            @for (card of bank.cards; track card.number) {
-              <ion-item>
-                <ion-icon name="card-outline" slot="start" color="primary"></ion-icon>
-                <ion-label>
-                  <h2>{{ card.name }}</h2>
-                  <p>{{ card.number }}</p>
-                </ion-label>
-                <ion-note slot="end" color="danger">RD$ {{ card.debt | number:'1.2-2' }}</ion-note>
-              </ion-item>
-            }
-          }
-        </ion-card-content>
-      </ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Banco o entidad</ion-label>
+        <ion-input
+          [(ngModel)]="formulario.banco"
+          name="banco"
+          placeholder="Ej.: Banco Popular"
+          ngDefaultControl
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Tipo de deuda</ion-label>
+        <ion-select
+          [(ngModel)]="formulario.tipo"
+          name="tipo"
+          interface="popover"
+          ngDefaultControl
+        >
+          <ion-select-option value="Prestamo">Préstamo</ion-select-option>
+          <ion-select-option value="Tarjeta">Tarjeta de crédito</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-input
+          [(ngModel)]="formulario.descripcion"
+          name="descripcion"
+          placeholder="Ej.: Préstamo personal"
+          ngDefaultControl
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Balance pendiente (RD$)</ion-label>
+        <ion-input
+          type="number"
+          min="0"
+          [(ngModel)]="formulario.monto"
+          name="monto"
+          placeholder="0.00"
+          ngDefaultControl
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Cuota mensual (RD$)</ion-label>
+        <ion-input
+          type="number"
+          min="0"
+          [(ngModel)]="formulario.cuotaMensual"
+          name="cuotaMensual"
+          placeholder="0.00"
+          ngDefaultControl
+        ></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="formulario.tipo === 'Tarjeta'">
+        <ion-label position="stacked">Últimos 4 dígitos</ion-label>
+        <ion-input
+          inputmode="numeric"
+          maxlength="4"
+          [(ngModel)]="formulario.ultimos4"
+          name="ultimos4"
+          placeholder="0000"
+          ngDefaultControl
+        ></ion-input>
+      </ion-item>
+
+      <div class="form-actions">
+        <ion-button fill="outline" color="medium" (click)="cancelarEdicion()">
+          <ion-icon name="close-outline" slot="start"></ion-icon>
+          Cancelar
+        </ion-button>
+
+        <ion-button (click)="guardar()">
+          <ion-icon name="save-outline" slot="start"></ion-icon>
+          {{ editandoId ? 'Actualizar' : 'Guardar' }}
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="section-heading">
+    <div>
+      <h2>Deudas guardadas</h2>
+      <p>{{ deudas.length }} registro(s) almacenado(s)</p>
     </div>
-  }
+  </div>
+
+  <ion-card class="empty-card" *ngIf="!cargando && deudas.length === 0">
+    <ion-card-content class="ion-text-center">
+      <ion-icon name="wallet-outline"></ion-icon>
+      <h2>No hay deudas registradas</h2>
+      <p>Agrega una deuda para comenzar a probar el CRUD.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list class="debt-list" *ngIf="deudas.length > 0">
+    @for (deuda of deudas; track deuda.id) {
+      <ion-item-sliding>
+        <ion-item class="debt-item" lines="none">
+          <ion-icon
+            [name]="deuda.tipo === 'Tarjeta' ? 'card-outline' : 'cash-outline'"
+            slot="start"
+            [color]="deuda.tipo === 'Tarjeta' ? 'primary' : 'warning'"
+          ></ion-icon>
+
+          <ion-label>
+            <h2>{{ deuda.descripcion }}</h2>
+            <p>
+              <ion-icon name="business-outline"></ion-icon>
+              {{ deuda.banco }} · {{ deuda.tipo === 'Prestamo' ? 'Préstamo' : 'Tarjeta' }}
+              <span *ngIf="deuda.tipo === 'Tarjeta' && deuda.ultimos4">
+                · •••• {{ deuda.ultimos4 }}
+              </span>
+            </p>
+            <p *ngIf="deuda.cuotaMensual > 0">
+              Cuota: RD$ {{ deuda.cuotaMensual | number:'1.2-2' }}
+            </p>
+          </ion-label>
+
+          <ion-note slot="end" color="danger">
+            RD$ {{ deuda.monto | number:'1.2-2' }}
+          </ion-note>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="editar(deuda)">
+            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="confirmarEliminar(deuda)">
+            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    }
+  </ion-list>
+
+  <ion-card class="evidence-card">
+    <ion-card-content>
+      <h3>Módulo U9 · Almacenamiento</h3>
+      <p>
+        Esta pantalla implementa CRUD completo y persistencia local con
+        <strong>@ionic/storage-angular</strong>. Los registros permanecen guardados aunque
+        se cierre y se vuelva a abrir la aplicación.
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

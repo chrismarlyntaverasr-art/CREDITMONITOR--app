@@ -2,175 +2,224 @@
   display: block;
 }
 
-/* ENCABEZADO CREDITMONITOR - LIGHT & CLEAN */
 ion-header {
   box-shadow: none;
 
   ion-toolbar.custom-toolbar {
-    --background: #FFFFFF !important;
-    --color: #0F172A !important;
-    --border-color: #E2E8F0;
-    border-bottom: 1px solid #E2E8F0;
+    --background: #ffffff;
+    --color: #0f172a;
+    --border-color: #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
     padding: 8px 12px;
-
-    .brand-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-
-      .brand-logo {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-
-        ion-icon {
-          font-size: 1.4rem;
-          color: #2563EB; /* Azul cobalto fresco */
-        }
-
-        .brand-name {
-          font-size: 1.05rem;
-          font-weight: 800;
-          color: #0F172A;
-          letter-spacing: -0.4px;
-
-          span {
-            color: #2563EB;
-          }
-        }
-      }
-
-      .page-title {
-        margin: 0;
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: #64748B;
-        background: #F1F5F9;
-        padding: 4px 12px;
-        border-radius: 20px;
-      }
-    }
   }
 }
 
-/* CONTENIDO PRINCIPAL */
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  ion-icon {
+    font-size: 1.4rem;
+    color: #2563eb;
+  }
+}
+
+.brand-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.4px;
+
+  span {
+    color: #2563eb;
+  }
+}
+
+.page-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
 ion-content {
-  --background: #F4F7FA;
+  --background: #f4f7fa;
+}
 
-  /* Tarjeta de Total Acumulado */
-  .total-summary-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
-    margin: 0.8rem 0 1.2rem 0;
+.total-summary-card,
+.form-card,
+.empty-card,
+.evidence-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
 
-    .summary-label {
-      margin: 0;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #64748B;
+.total-summary-card {
+  margin: 0.8rem 0 1rem;
+
+  .summary-label {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .summary-amount {
+    margin: 6px 0 2px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #0f172a;
+  }
+
+  .summary-secondary {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.82rem;
+  }
+}
+
+.add-button {
+  margin-bottom: 1rem;
+}
+
+.form-card {
+  margin: 0 0 1rem;
+
+  ion-card-title {
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  ion-card-subtitle {
+    color: #64748b;
+  }
+
+  ion-item {
+    --background: transparent;
+  }
+}
+
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.2rem 0 0.6rem;
+
+  h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  p {
+    margin: 2px 0 0;
+    color: #64748b;
+    font-size: 0.78rem;
+  }
+}
+
+.debt-list {
+  background: transparent;
+  padding: 0;
+}
+
+.debt-item {
+  --background: #ffffff;
+  --padding-start: 14px;
+  --inner-padding-end: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+
+  > ion-icon {
+    font-size: 1.35rem;
+    margin-right: 12px;
+  }
+
+  ion-label {
+    h2 {
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0f172a;
     }
 
-    .summary-amount {
-      margin: 6px 0 0 0;
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: #0F172A;
+    p {
+      margin: 2px 0;
+      font-size: 0.78rem;
+      color: #64748b;
     }
   }
 
-  /* Tarjeta del Banco con tono Slate/Gris Profesional sin el azul oscuro pesado */
-  .bank-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 18px;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
-    margin-bottom: 1.2rem;
-    overflow: hidden;
+  ion-note {
+    font-weight: 800;
+    font-size: 0.86rem;
+  }
+}
 
-    .bank-header {
-      background: #1E293B; /* Slate Oscuro elegante (no azul eléctrico pesadísimo) */
-      padding: 1rem 1.2rem;
-      color: #FFFFFF;
+.empty-card {
+  ion-icon {
+    font-size: 2.4rem;
+    color: #64748b;
+  }
 
-      .bank-title-box {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+  h2 {
+    margin: 8px 0 4px;
+    color: #0f172a;
+  }
 
-        ion-icon {
-          font-size: 1.3rem;
-          color: #38BDF8;
-        }
+  p {
+    margin: 0;
+    color: #64748b;
+  }
+}
 
-        h2 {
-          margin: 0;
-          font-size: 1.1rem;
-          font-weight: 800;
-          color: #FFFFFF;
-        }
-      }
+.evidence-card {
+  margin: 1rem 0 5rem;
+  border-left: 4px solid #2563eb;
 
-      .bank-total {
-        margin: 4px 0 0 0;
-        font-size: 0.8rem;
-        opacity: 0.85;
-        font-weight: 500;
-      }
-    }
+  h3 {
+    margin: 0 0 6px;
+    color: #0f172a;
+    font-size: 0.95rem;
+  }
 
-    ion-card-content {
-      padding: 1rem;
+  p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+}
 
-      .section-label {
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: #2563EB;
-        margin: 0.8rem 0 0.4rem 0;
+@media (max-width: 380px) {
+  .form-actions {
+    grid-template-columns: 1fr;
+  }
 
-        &:first-of-type {
-          margin-top: 0;
-        }
-      }
-
-      ion-list {
-        background: transparent;
-        padding: 0;
-
-        ion-item {
-          --background: transparent;
-          --padding-start: 0;
-          --inner-padding-end: 0;
-          --border-color: #F1F5F9;
-
-          .item-icon {
-            color: #D97706;
-            font-size: 1.3rem;
-            margin-right: 12px;
-          }
-
-          ion-label {
-            h2 {
-              font-size: 0.95rem;
-              font-weight: 700;
-              color: #0F172A;
-            }
-
-            p {
-              font-size: 0.78rem;
-              color: #64748B;
-            }
-          }
-
-          .debt-amount {
-            font-size: 0.92rem;
-            font-weight: 800;
-            color: #EF4444;
-          }
-        }
-      }
-    }
+  .page-title {
+    font-size: 0.8rem;
   }
 }
