@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cámara</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="camera-content">
+
+  <div class="camera-container">
+
+    <div class="camera-icon">
+      📷
+    </div>
+
+    <h1>Captura de foto</h1>
+
+    <p>
+      Utiliza la cámara para tomar una fotografía.
+    </p>
+
+    <ion-button
+      expand="block"
+      (click)="tomarFoto()">
+      TOMAR FOTO
+    </ion-button>
+
+    @if (foto) {
+      <ion-card class="photo-card">
+
+        <ion-card-content>
+
+          <ion-img
+            [src]="foto"
+            alt="Foto capturada">
+          </ion-img>
+
+          <ion-text>
+            <p class="photo-message">
+              Foto capturada correctamente.
+            </p>
+          </ion-text>
+
+          <ion-button
+            expand="block"
+            fill="outline"
+            color="danger"
+            (click)="eliminarFoto()">
+            ELIMINAR FOTO
+          </ion-button>
+
+        </ion-card-content>
+
+      </ion-card>
+    }
+
+  </div>
+
+</ion-content>

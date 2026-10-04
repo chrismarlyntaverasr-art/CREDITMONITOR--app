@@ -21,6 +21,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./tabs/tabs.routes').then((m) => m.routes),
   },
+    {
+  path: 'camara',
+  loadComponent: () =>
+    import('./pages/camara/camara.page').then((m) => m.CamaraPage),
+  },
   {
     path: '**',
     redirectTo: 'welcome',
@@ -36,5 +41,9 @@ export const routes: Routes = [
   {
     path: 'salud-financiera',
     loadComponent: () => import('./pages/salud-financiera/salud-financiera.page').then( m => m.SaludFinancieraPage)
+  },
+  {
+    path: 'camara',
+    loadComponent: () => import('./pages/camara/camara.page').then( m => m.CamaraPage)
   },
 ];
