@@ -1,79 +1,352 @@
+/* =========================================================
+   SOLO TAB3 - CRÉDITOS DISPONIBLES
+   Estos estilos están aislados para esta pantalla.
+   ========================================================= */
+
 :host {
   display: block;
 }
 
-ion-header {
-  ion-toolbar {
-    --background: #FFFFFF;
-    --color: #0F172A;
-    border-bottom: 1px solid #E2E8F0;
 
-    ion-title {
-      font-weight: 800;
-      color: #f6f7fa;
-    }
-  }
+/* =========================================================
+   FONDO DE LA PANTALLA
+   ========================================================= */
+
+.tab3-content {
+  --background: #f5f7fa;
 }
 
-ion-content {
-  --background: #F4F7FA;
 
-  ion-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
-    margin: 1rem 0;
+/* =========================================================
+   TARJETA DEL ESCÁNER QR
+   ========================================================= */
 
-    ion-card-header {
-      ion-card-title {
-        color: #0F172A;
-        font-weight: 800;
-      }
-    }
+.qr-card {
+  margin: 8px 0 20px;
 
-    ion-card-content {
-      color: #64748B;
+  --background: #ffffff;
 
-      ion-list {
-        background: transparent;
-      }
+  background: #ffffff;
 
-      ion-item {
-        --background: #F8FAFC;
-        --color: #0F172A;
-        --border-color: #E2E8F0;
-        border-radius: 12px;
-        margin-bottom: 8px;
+  border-radius: 16px;
 
-        ion-icon {
-          color: #2563EB;
-        }
+  overflow: hidden;
 
-        ion-label {
-          h2 {
-            color: #0F172A;
-            font-weight: 700;
-          }
-          p {
-            color: #64748B;
-          }
-        }
+  border: 1px solid #e5e7eb;
 
-        ion-note {
-          color: #16A34A;
-          font-weight: 800;
-        }
-      }
-    }
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Encabezado QR */
+
+.qr-card ion-card-header {
+  background: #ffffff;
+
+  padding: 18px 18px 10px;
+}
+
+.qr-card ion-card-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #1f2937;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+.qr-card ion-card-title ion-icon {
+  color: #3880ff;
+
+  font-size: 25px;
+}
+
+
+/* Contenido QR */
+
+.qr-card ion-card-content {
+  background: #ffffff;
+
+  color: #374151;
+
+  padding: 10px 18px 20px;
+}
+
+.qr-card p {
+  color: #6b7280;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  margin: 4px 0 14px;
+}
+
+
+/* =========================================================
+   BOTÓN ESCANEAR
+   ========================================================= */
+
+.qr-card ion-button {
+  margin: 8px 0 0;
+
+  --border-radius: 10px;
+
+  height: 48px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   MENSAJE DEL ESCANEO
+   ========================================================= */
+
+.scan-message {
+  text-align: center;
+
+  margin: 14px 0 0 !important;
+
+  color: #198754 !important;
+
+  font-size: 14px !important;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   OFERTA ENCONTRADA
+   ========================================================= */
+
+.offer-result-card {
+  margin: 0 0 22px;
+
+  --background: #ffffff;
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  border: 1px solid #dbeafe;
+
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.09);
+}
+
+
+/* Encabezado */
+
+.offer-result-card ion-card-header {
+  background: #f0f7ff;
+
+  padding: 18px;
+}
+
+.offer-result-card ion-card-title {
+  color: #1e3a8a;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+
+/* Contenido */
+
+.offer-result-card ion-card-content {
+  background: #ffffff;
+
+  color: #374151;
+
+  padding: 18px;
+}
+
+
+/* Datos de la oferta */
+
+.offer-result-card p {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin: 0;
+
+  padding: 13px 0;
+
+  color: #4b5563;
+
+  font-size: 15px;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+.offer-result-card p:last-of-type {
+  border-bottom: none;
+}
+
+.offer-result-card p strong {
+  color: #374151;
+
+  font-weight: 600;
+}
+
+
+/* Botón */
+
+.offer-result-card ion-button {
+  margin-top: 18px;
+
+  --border-radius: 10px;
+
+  height: 46px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CRÉDITOS DISPONIBLES
+   ========================================================= */
+
+.credit-card {
+  margin: 0 0 18px;
+
+  --background: #ffffff;
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Encabezado del banco */
+
+.credit-card ion-card-header {
+  padding: 16px 18px;
+
+  color: #ffffff;
+}
+
+.credit-card ion-card-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #ffffff;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+.credit-card ion-card-title ion-icon {
+  color: #ffffff;
+
+  font-size: 23px;
+}
+
+.credit-card ion-card-subtitle {
+  margin-top: 6px;
+
+  color: #e0e0e0;
+
+  font-size: 13px;
+}
+
+
+/* Contenido */
+
+.credit-card ion-card-content {
+  background: #ffffff;
+
+  color: #374151;
+
+  padding: 18px;
+}
+
+
+/* Monto */
+
+.credit-card h2 {
+  font-size: 23px !important;
+
+  font-weight: 700 !important;
+
+  color: #198754 !important;
+
+  margin: 0 0 12px !important;
+}
+
+
+/* Descripción */
+
+.credit-card p {
+  color: #5f6368 !important;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  margin: 0 0 14px !important;
+}
+
+
+/* Tasa */
+
+.credit-card ion-chip {
+  margin: 0;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.credit-card ion-chip ion-icon {
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   PANTALLAS PEQUEÑAS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .qr-card ion-card-title {
+    font-size: 18px;
   }
 
-  ion-badge {
-    --background: #EFF6FF;
-    --color: #2563EB;
-    border: 1px solid #2563EB;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-weight: 700;
+  .offer-result-card ion-card-title {
+    font-size: 18px;
   }
+
+  .offer-result-card p {
+    font-size: 14px;
+  }
+
 }

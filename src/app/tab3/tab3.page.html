@@ -4,32 +4,224 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding tab3-content">
+
+  <!-- =====================================================
+       TARJETA DE ESCANEO QR
+       ===================================================== -->
+
+  <ion-card class="qr-card">
+
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="qr-code-outline"></ion-icon>
+        Oferta de crédito
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p>
+        ¿Tienes una oferta de crédito?
+        Escanea el código QR de tu oferta para consultar sus datos.
+      </p>
+
+      <!-- Antes de escanear -->
+      @if (!resultadoQR) {
+
+        <ion-button
+          expand="block"
+          (click)="escanearOferta()">
+
+          <ion-icon
+            name="qr-code-outline"
+            slot="start">
+          </ion-icon>
+
+          ESCANEAR OFERTA
+
+        </ion-button>
+
+      }
+
+      <!-- Después de escanear -->
+      @else if (!ofertaEscaneada) {
+
+        <ion-button
+          expand="block"
+          color="success"
+          (click)="mostrarOferta()">
+
+          <ion-icon
+            name="checkmark-circle-outline"
+            slot="start">
+          </ion-icon>
+
+          MOSTRAR OFERTA
+
+        </ion-button>
+
+      }
+
+      <!-- Mensaje -->
+      @if (mensajeEscaneo) {
+
+        <p class="scan-message">
+          {{ mensajeEscaneo }}
+        </p>
+
+      }
+
+    </ion-card-content>
+
+  </ion-card>
+
+
+  <!-- =====================================================
+       RESULTADO DE LA OFERTA ESCANEADA
+       ===================================================== -->
+
+  @if (ofertaEscaneada) {
+
+    <ion-card class="offer-result-card">
+
+      <ion-card-header>
+
+        <ion-card-title>
+          Oferta encontrada
+        </ion-card-title>
+
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <p>
+          <strong>Banco:</strong>
+          <span>
+            {{ ofertaEscaneada.banco }}
+          </span>
+        </p>
+
+        <p>
+          <strong>Tipo de crédito:</strong>
+          <span>
+            {{ ofertaEscaneada.tipo }}
+          </span>
+        </p>
+
+        <p>
+          <strong>Monto:</strong>
+          <span>
+            RD$ {{ +ofertaEscaneada.monto | number:'1.2-2' }}
+          </span>
+        </p>
+
+        <p>
+          <strong>Tasa:</strong>
+          <span>
+            {{ ofertaEscaneada.tasa }}
+          </span>
+        </p>
+
+        <p>
+          <strong>Plazo:</strong>
+          <span>
+            {{ ofertaEscaneada.plazo }} meses
+          </span>
+        </p>
+
+        <ion-button
+          expand="block"
+          fill="outline"
+          (click)="limpiarOferta()">
+
+          ESCANEAR OTRA OFERTA
+
+        </ion-button>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  }
+
+
+  <!-- =====================================================
+       CRÉDITOS DISPONIBLES
+       ===================================================== -->
+
   @for (item of credits; track item.bankName) {
+
     <div>
-      <ion-card>
-        <ion-card-header [style.backgroundColor]="item.logoColor" style="color: white;">
+
+      <ion-card class="credit-card">
+
+        <!-- Encabezado del banco -->
+        <ion-card-header
+          [style.backgroundColor]="item.logoColor"
+          style="color: white;">
+
           <ion-card-title style="color: white;">
-            <ion-icon name="wallet-outline"></ion-icon> {{ item.bankName }}
+
+            <ion-icon
+              name="wallet-outline">
+            </ion-icon>
+
+            {{ item.bankName }}
+
           </ion-card-title>
-          <ion-card-subtitle style="color: #e0e0e0;">{{ item.creditType }}</ion-card-subtitle>
+
+          <ion-card-subtitle
+            style="color: #e0e0e0;">
+
+            {{ item.creditType }}
+
+          </ion-card-subtitle>
+
         </ion-card-header>
 
-        <ion-card-content class="ion-padding-top">
+
+        <!-- Información del crédito -->
+        <ion-card-content>
+
           <ion-text color="success">
-            <h2 style="font-size: 1.5rem; font-weight: bold; margin: 5px 0;">
+
+            <h2>
+
               RD$ {{ item.availableAmount | number:'1.2-2' }}
+
             </h2>
+
           </ion-text>
 
-          <p style="margin-bottom: 10px; color: #555;">{{ item.description }}</p>
+
+          <p>
+
+            {{ item.description }}
+
+          </p>
+
 
           <ion-chip color="tertiary">
-            <ion-icon name="information-circle-outline"></ion-icon>
-            <ion-label>Tasa: {{ item.interestRate }}</ion-label>
+
+            <ion-icon
+              name="information-circle-outline">
+            </ion-icon>
+
+            <ion-label>
+
+              Tasa: {{ item.interestRate }}
+
+            </ion-label>
+
           </ion-chip>
+
         </ion-card-content>
+
       </ion-card>
+
     </div>
+
   }
+
 </ion-content>

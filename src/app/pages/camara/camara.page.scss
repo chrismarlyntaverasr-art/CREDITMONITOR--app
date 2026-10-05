@@ -1,0 +1,50 @@
+.camera-content {
+  --background: #f5f7fa;
+}
+
+.camera-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.camera-icon {
+  font-size: 70px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+ion-button {
+  margin-top: 15px;
+}
+
+.photo-card {
+  margin-top: 30px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.photo-card ion-img {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.photo-message {
+  color: #198754;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}

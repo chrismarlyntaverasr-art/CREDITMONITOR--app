@@ -1,79 +1,49 @@
-:host {
+/* =========================================
+   FOTO DE PERFIL - MÓDULO DE CÁMARA
+   ========================================= */
+
+.profile-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 15px 0 20px;
+}
+
+.profile-photo,
+.profile-photo-placeholder {
+  width: 120px !important;
+  height: 120px !important;
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 120px !important;
+  max-height: 120px !important;
+  border-radius: 50% !important;
+  margin: 0 auto 12px;
+  box-sizing: border-box;
+}
+
+.profile-photo {
   display: block;
+  object-fit: cover;
+  object-position: center;
+  border: 3px solid #3880ff;
 }
 
-ion-header {
-  ion-toolbar {
-    --background: #FFFFFF;
-    --color: #0F172A;
-    border-bottom: 1px solid #E2E8F0;
-
-    ion-title {
-      font-weight: 800;
-      color: #e4e9f6;
-    }
-  }
+.profile-photo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e9ecef;
+  border: 3px solid #3880ff;
 }
 
-ion-content {
-  --background: #F4F7FA;
+.profile-photo-placeholder ion-icon {
+  font-size: 60px;
+  color: #6c757d;
+}
 
-  ion-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
-    margin-bottom: 1.2rem;
-
-    ion-card-header {
-      ion-card-title {
-        color: #0F172A;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-
-        ion-icon {
-          color: #2563EB;
-        }
-      }
-    }
-
-    ion-card-content {
-      ion-item {
-        --background: #F8FAFC;
-        --color: #0F172A;
-        --border-color: #E2E8F0;
-        --highlight-color-focused: #2563EB;
-        border-radius: 12px;
-        margin-bottom: 12px;
-
-        ion-label {
-          color: #64748B !important;
-          font-weight: 600;
-        }
-
-        ion-input, ion-select {
-          --color: #0F172A;
-          font-weight: 600;
-        }
-      }
-
-      ion-button {
-        --background: #2563EB;
-        --color: #FFFFFF;
-        --border-radius: 12px;
-        font-weight: 700;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
-        margin-top: 1rem;
-
-        &[color="secondary"] {
-          --background: #F1F5F9;
-          --color: #0F172A;
-          border: 1px solid #E2E8F0;
-          box-shadow: none;
-        }
-      }
-    }
-  }
+.profile-photo-section ion-button {
+  margin: 0;
 }
