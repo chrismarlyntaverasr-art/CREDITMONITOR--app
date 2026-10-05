@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
+import { Router } from '@angular/router';
 import { 
   closeOutline,
   walletOutline, 
@@ -10,7 +11,8 @@ import {
   pieChartOutline, 
   alertCircleOutline, 
   checkmarkCircleOutline,
-  chevronForwardOutline 
+  chevronForwardOutline, 
+  headsetOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -23,6 +25,7 @@ import {
 })
 export class SaludFinancieraPage {
   private modalCtrl = inject(ModalController);
+    private router = inject(Router);
 
   // Puntuación general de salud financiera
   financialScore: number = 78;
@@ -49,11 +52,16 @@ export class SaludFinancieraPage {
       pieChartOutline, 
       alertCircleOutline, 
       checkmarkCircleOutline,
-      chevronForwardOutline 
+      chevronForwardOutline,
+      headsetOutline
     });
   }
 
   cerrar() {
     this.modalCtrl.dismiss();
+  }
+     async irAPodcasts() {
+    await this.modalCtrl.dismiss() ;
+    this.router.navigateByUrl('/podcasts') ;
   }
 }

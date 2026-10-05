@@ -16,6 +16,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/login/login.page').then((m) => m.LoginPage),
   },
+    {
+    path: 'podcasts',
+    loadComponent: () =>
+      import('./pages/podcasts/podcasts.page').then((m) => m.PodcastsPage),
+  },
   {
     path: 'tabs',
     loadChildren: () =>
