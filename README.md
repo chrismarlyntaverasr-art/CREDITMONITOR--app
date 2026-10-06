@@ -316,7 +316,7 @@ Complete los datos antes de entregar el repositorio.
 
 | Integrante | Matrícula | Módulo / responsabilidad |
 |---|---|---|
-| Héctor __________________ | __________________ | Unidad 9 — Almacenamiento / CRUD con Ionic Storage |
+| Héctor Ovalles Alonzo | 100046429 | Unidad 9 — Almacenamiento / CRUD con Ionic Storage |
 | Rossany __________________ | __________________ | Unidad 7 — Multimedia |
 | Randy __________________ | __________________ | Unidad 8 — Cámara / QR |
 | Michelle __________________ | __________________ | Unidad 10 — Servicios Web |
