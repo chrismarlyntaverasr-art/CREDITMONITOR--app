@@ -1,49 +1,267 @@
-/* =========================================
-   FOTO DE PERFIL - MÓDULO DE CÁMARA
-   ========================================= */
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+   ========================================================= */
+
+ion-content {
+  --background: #f4f7fa;
+}
+
+
+/* =========================================================
+   FOTO DE PERFIL
+   ========================================================= */
 
 .profile-photo-section {
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
   justify-content: center;
+
   width: 100%;
+
   margin: 15px 0 20px;
 }
 
+
 .profile-photo,
 .profile-photo-placeholder {
+
   width: 120px !important;
+
   height: 120px !important;
+
   min-width: 120px;
+
   min-height: 120px;
+
   max-width: 120px !important;
-  max-height: 120px !important;
-  border-radius: 50% !important;
+
+  max-height: 120px;
+
   margin: 0 auto 12px;
+
+  border-radius: 50% !important;
+
   box-sizing: border-box;
+
 }
+
 
 .profile-photo {
+
   display: block;
+
   object-fit: cover;
+
   object-position: center;
+
   border: 3px solid #3880ff;
+
 }
+
 
 .profile-photo-placeholder {
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   background: #e9ecef;
+
   border: 3px solid #3880ff;
+
 }
+
 
 .profile-photo-placeholder ion-icon {
+
   font-size: 60px;
+
   color: #6c757d;
+
 }
 
+
+/* =========================================================
+   BOTÓN CAMBIAR FOTO
+   ========================================================= */
+
 .profile-photo-section ion-button {
+
   margin: 0;
+
+  font-weight: 600;
+
+}
+
+
+.hidden-file-input {
+
+  display: none;
+
+}
+
+
+/* =========================================================
+   TARJETA DE DATOS
+   ========================================================= */
+
+ion-card {
+
+  margin: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 4px 15px rgba(15, 23, 42, 0.06);
+
+}
+
+
+ion-card-header {
+
+  padding-bottom: 8px;
+
+}
+
+
+ion-card-title {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #0f172a;
+
+  font-size: 1.05rem;
+
+  font-weight: 700;
+
+}
+
+
+ion-card-title ion-icon {
+
+  color: #2563eb;
+
+  font-size: 20px;
+
+}
+
+
+ion-card-content {
+
+  padding-top: 4px;
+
+}
+
+
+/* =========================================================
+   CAMPOS
+   ========================================================= */
+
+ion-item {
+
+  --background: transparent;
+
+  --color: #0f172a;
+
+  --border-color: #e2e8f0;
+
+  --padding-start: 0;
+
+  --inner-padding-end: 0;
+
+}
+
+
+ion-label {
+
+  color: #334155 !important;
+
+  font-weight: 600;
+
+}
+
+
+ion-input {
+
+  --color: #0f172a;
+
+  --placeholder-color: #94a3b8;
+
+}
+
+
+ion-select {
+
+  --color: #0f172a;
+
+}
+
+
+/* =========================================================
+   BOTÓN GUARDAR
+   ========================================================= */
+
+ion-card-content > ion-button {
+
+  margin-top: 18px;
+
+  --background: #2563eb;
+
+  --background-activated: #1d4ed8;
+
+  --border-radius: 8px;
+
+  font-weight: 700;
+
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR SESIÓN
+   ========================================================= */
+
+.logout-button {
+
+  display: block;
+
+  width: 100%;
+
+  margin-top: 14px;
+
+  margin-bottom: 20px;
+
+  --border-radius: 8px;
+
+  font-weight: 700;
+
+}
+
+
+/* =========================================================
+   ESPACIO INFERIOR
+   ========================================================= */
+
+.profile-bottom-space {
+
+  height: 70px;
+
 }

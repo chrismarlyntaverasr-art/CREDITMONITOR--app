@@ -1,162 +1,368 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="custom-toolbar">
+
     <ion-buttons slot="start">
-      <ion-button (click)="currentView === 'login' ? goBackToWelcome() : setView('login')">
-        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      <ion-button
+        (click)="currentView === 'login' ? goBackToWelcome() : setView('login')"
+      >
+        <ion-icon
+          name="arrow-back-outline"
+          slot="icon-only">
+        </ion-icon>
       </ion-button>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content class="custom-content ion-padding">
+
   <div class="login-container">
 
-    <!-- Header / Logo -->
+
+    <!-- =====================================================
+         ENCABEZADO
+         ===================================================== -->
+
     <div class="brand-header">
+
       <div class="shield-logo">
         <ion-icon name="shield-checkmark-sharp"></ion-icon>
       </div>
+
       <h1>CreditMonitor</h1>
 
+
       @if (currentView === 'login') {
-        <p>Ingresa tus credenciales para acceder a tu cuenta</p>
-      } @else if (currentView === 'register') {
-        <p>Crea una cuenta para comenzar a utilizar CreditMonitor</p>
-      } @else if (currentView === 'forgot') {
-        <p>Ingresa tu correo registrado para recuperar tu cuenta</p>
+
+        <p>
+          Ingresa tus credenciales para acceder a tu cuenta
+        </p>
+
       }
+
+      @if (currentView === 'register') {
+
+        <p>
+          Crea una cuenta para comenzar a utilizar CreditMonitor
+        </p>
+
+      }
+
+      @if (currentView === 'forgot') {
+
+        <p>
+          Ingresa tu correo registrado para recuperar tu cuenta
+        </p>
+
+      }
+
     </div>
 
-    <!-- 1. FORMULARIO LOGIN -->
+
+    <!-- =====================================================
+         LOGIN
+         ===================================================== -->
+
     @if (currentView === 'login') {
-      <form (ngSubmit)="onLogin()" class="form-content">
+
+      <form
+        (ngSubmit)="onLogin()"
+        class="form-content"
+      >
+
+        <!-- Usuario -->
         <div class="input-group">
-          <label>Usuario o Correo</label>
+
+          <label>
+            Usuario o Correo
+          </label>
+
           <div class="input-box">
-            <ion-icon name="person-outline"></ion-icon>
-            <input 
-              type="text" 
-              name="username" 
-              [(ngModel)]="loginData.username" 
-              placeholder="Ej: usuario123" 
-              required 
+
+            <ion-icon
+              name="person-outline">
+            </ion-icon>
+
+            <input
+              type="text"
+              name="username"
+              [(ngModel)]="loginData.username"
+              placeholder="Ej: chrismarlyn"
+              required
             />
+
           </div>
+
         </div>
 
+
+        <!-- Contraseña -->
         <div class="input-group">
-          <label>Contraseña</label>
+
+          <label>
+            Contraseña
+          </label>
+
           <div class="input-box">
-            <ion-icon name="lock-closed-outline"></ion-icon>
-            <input 
-              [type]="showPassword ? 'text' : 'password'" 
-              name="password" 
-              [(ngModel)]="loginData.password" 
-              placeholder="••••••••" 
-              required 
+
+            <ion-icon
+              name="lock-closed-outline">
+            </ion-icon>
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              name="password"
+              [(ngModel)]="loginData.password"
+              placeholder="••••••••"
+              required
             />
-            <ion-icon 
-              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
-              class="eye-toggle" 
+
+            <ion-icon
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+              class="eye-toggle"
               (click)="togglePassword()">
             </ion-icon>
+
           </div>
+
         </div>
 
+
+        <!-- Recuperar contraseña -->
         <div class="forgot-link">
-          <a (click)="setView('forgot')">¿Olvidaste tu contraseña?</a>
+
+          <a
+            (click)="setView('forgot')">
+            ¿Olvidaste tu contraseña?
+          </a>
+
         </div>
 
-        <button type="submit" class="btn-cyan">INICIAR SESIÓN</button>
 
+        <!-- Botón -->
+        <button
+          type="submit"
+          class="btn-cyan">
+          INICIAR SESIÓN
+        </button>
+
+
+        <!-- Error de login -->
+        @if (loginError) {
+
+          <p class="login-error">
+            {{ loginError }}
+          </p>
+
+        }
+
+
+        <!-- Registro -->
         <p class="footer-register">
-          ¿No tienes una cuenta? <a (click)="setView('register')">Regístrate aquí</a>
+
+          ¿No tienes una cuenta?
+
+          <a
+            (click)="setView('register')">
+            Regístrate aquí
+          </a>
+
         </p>
+
       </form>
+
     }
 
-    <!-- 2. FORMULARIO REGISTRO -->
+
+    <!-- =====================================================
+         REGISTRO
+         ===================================================== -->
+
     @if (currentView === 'register') {
-      <form (ngSubmit)="onRegister()" class="form-content">
+
+      <form
+        (ngSubmit)="onRegister()"
+        class="form-content"
+      >
+
+        <!-- Nombre -->
         <div class="input-group">
-          <label>Nombre Completo</label>
+
+          <label>
+            Nombre Completo
+          </label>
+
           <div class="input-box">
-            <ion-icon name="person-outline"></ion-icon>
-            <input 
-              type="text" 
-              name="fullName" 
-              [(ngModel)]="registerData.fullName" 
-              placeholder="Ej: Juan Pérez" 
-              required 
+
+            <ion-icon
+              name="person-outline">
+            </ion-icon>
+
+            <input
+              type="text"
+              name="fullName"
+              [(ngModel)]="registerData.fullName"
+              placeholder="Ej: Juan Pérez"
+              required
             />
+
           </div>
+
         </div>
 
+
+        <!-- Correo -->
         <div class="input-group">
-          <label>Correo Electrónico</label>
+
+          <label>
+            Correo Electrónico
+          </label>
+
           <div class="input-box">
-            <ion-icon name="mail-outline"></ion-icon>
-            <input 
-              type="email" 
-              name="email" 
-              [(ngModel)]="registerData.email" 
-              placeholder="correo@ejemplo.com" 
-              required 
+
+            <ion-icon
+              name="mail-outline">
+            </ion-icon>
+
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="registerData.email"
+              placeholder="correo@ejemplo.com"
+              required
             />
+
           </div>
+
         </div>
 
+
+        <!-- Contraseña -->
         <div class="input-group">
-          <label>Contraseña</label>
+
+          <label>
+            Contraseña
+          </label>
+
           <div class="input-box">
-            <ion-icon name="lock-closed-outline"></ion-icon>
-            <input 
-              [type]="showPassword ? 'text' : 'password'" 
-              name="regPassword" 
-              [(ngModel)]="registerData.password" 
-              placeholder="••••••••" 
-              required 
+
+            <ion-icon
+              name="lock-closed-outline">
+            </ion-icon>
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              name="regPassword"
+              [(ngModel)]="registerData.password"
+              placeholder="••••••••"
+              required
             />
-            <ion-icon 
-              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
-              class="eye-toggle" 
+
+            <ion-icon
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+              class="eye-toggle"
               (click)="togglePassword()">
             </ion-icon>
+
           </div>
+
         </div>
 
-        <button type="submit" class="btn-cyan">REGISTRARSE</button>
 
+        <!-- Botón registro -->
+        <button
+          type="submit"
+          class="btn-cyan">
+          REGISTRARSE
+        </button>
+
+
+        <!-- Error de registro -->
+        @if (registerError) {
+
+          <p class="login-error">
+            {{ registerError }}
+          </p>
+
+        }
+
+
+        <!-- Volver al login -->
         <p class="footer-register">
-          ¿Ya tienes cuenta? <a (click)="setView('login')">Inicia sesión aquí</a>
+
+          ¿Ya tienes cuenta?
+
+          <a
+            (click)="setView('login')">
+            Inicia sesión aquí
+          </a>
+
         </p>
+
       </form>
+
     }
 
-    <!-- 3. FORMULARIO RECUPERAR CONTRASEÑA -->
+
+    <!-- =====================================================
+         RECUPERAR CONTRASEÑA
+         ===================================================== -->
+
     @if (currentView === 'forgot') {
-      <form (ngSubmit)="onForgot()" class="form-content">
+
+      <form
+        (ngSubmit)="onForgot()"
+        class="form-content"
+      >
+
         <div class="input-group">
-          <label>Correo Registrado</label>
+
+          <label>
+            Correo Registrado
+          </label>
+
           <div class="input-box">
-            <ion-icon name="mail-outline"></ion-icon>
-            <input 
-              type="email" 
-              name="forgotEmail" 
-              [(ngModel)]="forgotEmail" 
-              placeholder="correo@ejemplo.com" 
-              required 
+
+            <ion-icon
+              name="mail-outline">
+            </ion-icon>
+
+            <input
+              type="email"
+              name="forgotEmail"
+              [(ngModel)]="forgotEmail"
+              placeholder="correo@ejemplo.com"
+              required
             />
+
           </div>
+
         </div>
 
-        <button type="submit" class="btn-cyan">RECUPERAR CONTRASEÑA</button>
+
+        <button
+          type="submit"
+          class="btn-cyan">
+          RECUPERAR CONTRASEÑA
+        </button>
+
 
         <p class="footer-register">
-          <a (click)="setView('login')">Volver al Inicio de Sesión</a>
+
+          <a
+            (click)="setView('login')">
+            Volver al Inicio de Sesión
+          </a>
+
         </p>
+
       </form>
+
     }
+
 
   </div>
+
 </ion-content>

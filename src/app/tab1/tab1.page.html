@@ -1,306 +1,1053 @@
 <ion-header class="ion-no-border">
+
   <ion-toolbar class="dashboard-toolbar">
-    
+
     <!-- PERFIL DE USUARIO EN SLOT START CON BADGE DE RED -->
+
     <div slot="start" class="user-profile-header">
+
       <div class="avatar-box">
+
         <ion-icon name="person-circle-outline"></ion-icon>
+
       </div>
+
       <div class="user-greeting">
-        <span class="welcome-sub">Bienvenido de nuevo,</span>
+
+        <span class="welcome-sub">
+          Bienvenido de nuevo,
+        </span>
+
         <h2 class="welcome-name">
+
           {{ userName }} 👋
-          
-          <!-- INDICADOR ION-BADGE PARA ESTADO DE RED (ONLINE/OFFLINE) -->
-          <ion-badge [color]="isOnline ? 'success' : 'danger'" class="network-badge">
-            <ion-icon [name]="isOnline ? 'wifi' : 'wifi-outline'"></ion-icon>
+
+          <!-- INDICADOR DE ESTADO DE RED -->
+
+          <ion-badge
+            [color]="isOnline ? 'success' : 'danger'"
+            class="network-badge">
+
+            <ion-icon
+              [name]="isOnline ? 'wifi' : 'wifi-outline'">
+            </ion-icon>
+
             {{ isOnline ? 'Online' : 'Offline' }}
+
           </ion-badge>
+
         </h2>
+
       </div>
+
     </div>
 
-    <!-- BOTONES DE NOTIFICACIONES, MAPA Y CONECTIVIDAD EN SLOT END -->
+
+    <!-- BOTONES DE MAPA, NFC/BLE Y NOTIFICACIONES -->
+
     <ion-buttons slot="end">
-      <!-- BOTÓN RÁPIDO PARA MAPA GPS / SUCURSALES -->
-      <ion-button (click)="abrirMapaGPS()">
-        <ion-icon slot="icon-only" name="map-outline" color="primary"></ion-icon>
+
+      <!-- MAPA GPS -->
+
+      <ion-button
+        (click)="abrirMapaGPS()">
+
+        <ion-icon
+          slot="icon-only"
+          name="map-outline"
+          color="primary">
+        </ion-icon>
+
       </ion-button>
 
-      <!-- BOTÓN RÁPIDO PARA MODAL NFC / BLE -->
-      <ion-button (click)="openNfcBleModal()">
-        <ion-icon slot="icon-only" name="hardware-chip-outline" color="tertiary"></ion-icon>
+
+      <!-- NFC / BLE -->
+
+      <ion-button
+        (click)="openNfcBleModal()">
+
+        <ion-icon
+          slot="icon-only"
+          name="hardware-chip-outline"
+          color="tertiary">
+        </ion-icon>
+
       </ion-button>
 
-      <ion-button class="notification-btn" (click)="openNotificationsModal()">
+
+      <!-- NOTIFICACIONES -->
+
+      <ion-button
+        class="notification-btn"
+        (click)="openNotificationsModal()">
+
         <div class="bell-container">
-          <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
-          
-          <!-- INDICADOR ROJO FLOTANTE ARRIBA -->
+
+          <ion-icon
+            slot="icon-only"
+            name="notifications-outline">
+          </ion-icon>
+
           <span class="red-alert-dot"></span>
+
         </div>
+
       </ion-button>
+
     </ion-buttons>
 
   </ion-toolbar>
+
 </ion-header>
+
 
 <ion-content class="dashboard-content">
 
-  <!-- 1. COMPONENTE PULL-TO-REFRESH (Petición de refresco) -->
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content 
-      pullingIcon="chevron-down-circle-outline" 
-      pullingText="Desliza para actualizar" 
-      refreshingSpinner="circles" 
+
+  <!-- =====================================================
+       PULL TO REFRESH
+       ===================================================== -->
+
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="handleRefresh($event)">
+
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Desliza para actualizar"
+      refreshingSpinner="circles"
       refreshingText="Actualizando...">
     </ion-refresher-content>
+
   </ion-refresher>
+
 
   <div class="dashboard-wrapper">
 
-    <!-- FILTRO DE PERIODO ACTUALIZADO CON setPeriod() -->
+
+    <!-- =====================================================
+         SELECTOR DE PERIODO
+         ===================================================== -->
+
     <div class="period-selector">
-      <button [class.active]="selectedPeriod === 'month'" (click)="setPeriod('month')">Este Mes</button>
-      <button [class.active]="selectedPeriod === 'quarter'" (click)="setPeriod('quarter')">Trimestre</button>
-      <button [class.active]="selectedPeriod === 'year'" (click)="setPeriod('year')">Año 2026</button>
+
+      <button
+        [class.active]="selectedPeriod === 'month'"
+        (click)="setPeriod('month')">
+
+        Este Mes
+
+      </button>
+
+
+      <button
+        [class.active]="selectedPeriod === 'quarter'"
+        (click)="setPeriod('quarter')">
+
+        Trimestre
+
+      </button>
+
+
+      <button
+        [class.active]="selectedPeriod === 'year'"
+        (click)="setPeriod('year')">
+
+        Año 2026
+
+      </button>
+
     </div>
 
-    <!-- TARJETA PRINCIPAL SCORE CREDITICIO -->
+
+    <!-- =====================================================
+         SCORE CREDITICIO
+         ===================================================== -->
+
     <div class="credit-score-card">
+
       <div class="score-top">
+
         <div class="score-title">
-          <ion-icon name="shield-checkmark-outline"></ion-icon>
-          <span>Score Crediticio</span>
+
+          <ion-icon
+            name="shield-checkmark-outline">
+          </ion-icon>
+
+          <span>
+            Score Crediticio
+          </span>
+
         </div>
-        <div class="score-status-chip" [style.color]="scoreColor" [style.border-color]="scoreColor">
+
+
+        <div
+          class="score-status-chip"
+          [style.color]="scoreColor"
+          [style.border-color]="scoreColor">
+
           {{ scoreLabel }}
+
         </div>
+
       </div>
+
 
       <div class="score-center">
+
         <div class="score-value-group">
-          <h1 class="score-number">{{ creditScore }}</h1>
-          <span class="score-max">/ 850 pts</span>
+
+          <h1 class="score-number">
+            {{ creditScore }}
+          </h1>
+
+          <span class="score-max">
+            / 850 pts
+          </span>
+
         </div>
+
+
         <div class="score-chart-ring">
-          <div class="score-fill" [style.width.%]="(creditScore / 850) * 100" [style.background]="scoreColor"></div>
+
+          <div
+            class="score-fill"
+            [style.width.%]="(creditScore / 850) * 100"
+            [style.background]="scoreColor">
+          </div>
+
         </div>
+
       </div>
+
 
       <div class="score-footer">
+
+
         <div class="metric-item">
-          <span class="metric-label">Uso Global</span>
-          <span class="metric-value">{{ getUsagePercentage(selectedCard) }}%</span>
+
+          <span class="metric-label">
+            Uso Global
+          </span>
+
+          <span class="metric-value">
+
+            {{ getUsagePercentage(selectedCard) }}%
+
+          </span>
+
         </div>
+
+
         <div class="metric-divider"></div>
+
+
         <div class="metric-item">
-          <span class="metric-label">Puntualidad</span>
-          <span class="metric-value highlight">100%</span>
+
+          <span class="metric-label">
+            Puntualidad
+          </span>
+
+          <span class="metric-value highlight">
+            100%
+          </span>
+
         </div>
+
+
         <div class="metric-divider"></div>
+
+
         <div class="metric-item">
-          <span class="metric-label">Cashback</span>
-          <span class="metric-value">${{ periodCashback | number:'1.2-2' }}</span>
+
+          <span class="metric-label">
+            Cashback
+          </span>
+
+          <span class="metric-value">
+
+            ${{ periodCashback | number:'1.2-2' }}
+
+          </span>
+
         </div>
+
+
       </div>
+
     </div>
 
-    <!-- CARRUSEL SELECTOR DE TARJETAS -->
+
+    <!-- =====================================================
+         MIS TARJETAS DE CRÉDITO
+         ===================================================== -->
+
     <div class="section-title">
-      <h3>Mis Tarjetas de Crédito</h3>
-      <span class="card-count">{{ cards.length }} Activas</span>
+
+      <h3>
+        Mis Tarjetas de Crédito
+      </h3>
+
+      <span class="card-count">
+
+        {{ cards.length }} Activas
+
+      </span>
+
     </div>
+
 
     <div class="cards-carousel">
+
+
       @for (card of cards; track card.id) {
-        <div 
+
+        <div
           class="interactive-card {{ card.colorClass }}"
           [class.selected]="selectedCard.id === card.id"
           [class.frozen]="card.isFrozen"
           (click)="selectCard(card)"
         >
+
+
           @if (card.isFrozen) {
+
             <div class="frozen-overlay">
-              <ion-icon name="lock-closed-outline"></ion-icon>
-              <span>Tarjeta Congelada</span>
+
+              <ion-icon
+                name="lock-closed-outline">
+              </ion-icon>
+
+              <span>
+                Tarjeta Congelada
+              </span>
+
             </div>
+
           }
 
+
           <div class="card-header">
-            <span class="brand-name">{{ card.cardName }}</span>
-            <span class="card-type">{{ card.type }}</span>
+
+            <span class="brand-name">
+              {{ card.cardName }}
+            </span>
+
+            <span class="card-type">
+              {{ card.type }}
+            </span>
+
           </div>
+
 
           <div class="card-chip-row">
+
             <div class="chip"></div>
-            <ion-icon name="wifi-outline" class="contactless-icon"></ion-icon>
+
+            <ion-icon
+              name="wifi-outline"
+              class="contactless-icon">
+            </ion-icon>
+
           </div>
 
-          <div class="card-number">{{ card.cardNumber }}</div>
+
+          <div class="card-number">
+
+            {{ card.cardNumber }}
+
+          </div>
+
 
           <div class="card-footer">
+
+
             <div>
-              <span class="lbl">Consumido</span>
-              <span class="val">${{ card.balance | number:'1.2-2' }}</span>
+
+              <span class="lbl">
+                Consumido
+              </span>
+
+              <span class="val">
+
+                ${{ card.balance | number:'1.2-2' }}
+
+              </span>
+
             </div>
+
+
             <div>
-              <span class="lbl">Disponible</span>
-              <span class="val">${{ getAvailableCredit(card) | number:'1.2-2' }}</span>
+
+              <span class="lbl">
+                Disponible
+              </span>
+
+              <span class="val">
+
+                ${{ getAvailableCredit(card) | number:'1.2-2' }}
+
+              </span>
+
             </div>
+
+
           </div>
+
+
         </div>
+
       }
+
     </div>
 
-    <!-- BOTONES DE ACCIÓN RÁPIDA -->
+
+    <!-- =====================================================
+         BOTONES DE ACCIÓN RÁPIDA
+         ===================================================== -->
+
     <div class="quick-actions-grid">
-      <div class="action-btn" (click)="makePayment()">
+
+
+      <!-- PAGAR -->
+
+      <div
+        class="action-btn"
+        (click)="makePayment()">
+
         <div class="icon-circle primary">
-          <ion-icon name="wallet-outline"></ion-icon>
+
+          <ion-icon
+            name="wallet-outline">
+          </ion-icon>
+
         </div>
-        <span>Pagar</span>
+
+        <span>
+          Pagar
+        </span>
+
       </div>
 
-      <div class="action-btn" (click)="toggleFreezeCard()">
-        <div class="icon-circle warning" [class.active-freeze]="selectedCard.isFrozen">
-          <ion-icon [name]="selectedCard.isFrozen ? 'lock-open-outline' : 'lock-closed-outline'"></ion-icon>
+
+      <!-- CONGELAR -->
+
+      <div
+        class="action-btn"
+        (click)="toggleFreezeCard()">
+
+        <div
+          class="icon-circle warning"
+          [class.active-freeze]="selectedCard.isFrozen">
+
+          <ion-icon
+            [name]="selectedCard.isFrozen
+              ? 'lock-open-outline'
+              : 'lock-closed-outline'">
+          </ion-icon>
+
         </div>
-        <span>{{ selectedCard.isFrozen ? 'Descongelar' : 'Congelar' }}</span>
+
+        <span>
+
+          {{
+            selectedCard.isFrozen
+              ? 'Descongelar'
+              : 'Congelar'
+          }}
+
+        </span>
+
       </div>
 
-      <div class="action-btn" (click)="openStatementModal()">
+
+      <!-- ESTADO -->
+
+      <div
+        class="action-btn"
+        (click)="openStatementModal()">
+
         <div class="icon-circle info">
-          <ion-icon name="document-text-outline"></ion-icon>
+
+          <ion-icon
+            name="document-text-outline">
+          </ion-icon>
+
         </div>
-        <span>Estado</span>
+
+        <span>
+          Estado
+        </span>
+
       </div>
 
-      <div class="action-btn" (click)="openTransferModal()">
+
+      <!-- TRANSFERIR -->
+
+      <div
+        class="action-btn"
+        (click)="openTransferModal()">
+
         <div class="icon-circle success">
-          <ion-icon name="swap-horizontal-outline"></ion-icon>
+
+          <ion-icon
+            name="swap-horizontal-outline">
+          </ion-icon>
+
         </div>
-        <span>Transferir</span>
+
+        <span>
+          Transferir
+        </span>
+
       </div>
 
-      <!-- BOTÓN PARA MAPA GPS Y SUCURSALES -->
-      <div class="action-btn" (click)="abrirMapaGPS()">
-       <div class="icon-circle success" style="background: rgba(0, 229, 255, 0.25); color: #00e5ff;">
-    <ion-icon name="map-outline"></ion-icon>
-    </div>
-        <span>Sucursales</span>
-      </div>
 
-      <!-- BOTÓN PARA EL MÓDULO: NFC / BLE -->
-      <div class="action-btn" (click)="openNfcBleModal()">
-        <div class="icon-circle tertiary" style="background: rgba(112, 68, 255, 0.15); color: #7044ff;">
-          <ion-icon name="hardware-chip-outline"></ion-icon>
+      <!-- SUCURSALES -->
+
+      <div
+        class="action-btn"
+        (click)="abrirMapaGPS()">
+
+        <div
+          class="icon-circle success"
+          style="
+            background: rgba(0, 229, 255, 0.25);
+            color: #00e5ff;
+          ">
+
+          <ion-icon
+            name="map-outline">
+          </ion-icon>
+
         </div>
-        <span>NFC / BLE</span>
+
+        <span>
+          Sucursales
+        </span>
+
       </div>
+
+
+      <!-- NFC / BLE -->
+
+      <div
+        class="action-btn"
+        (click)="openNfcBleModal()">
+
+        <div
+          class="icon-circle tertiary"
+          style="
+            background: rgba(112, 68, 255, 0.15);
+            color: #7044ff;
+          ">
+
+          <ion-icon
+            name="hardware-chip-outline">
+          </ion-icon>
+
+        </div>
+
+        <span>
+          NFC / BLE
+        </span>
+
+      </div>
+
+
     </div>
 
-    <!-- DETALLES DE CORTE Y PAGO -->
+
+    <!-- =====================================================
+         FECHA DE CORTE Y LÍMITE DE PAGO
+         ===================================================== -->
+
     <div class="card-dates-panel">
+
+
       <div class="date-item">
-        <ion-icon name="calendar-outline"></ion-icon>
+
+        <ion-icon
+          name="calendar-outline">
+        </ion-icon>
+
         <div>
-          <span class="lbl">Fecha de Corte</span>
-          <span class="val">{{ selectedCard.cutOffDate }}</span>
+
+          <span class="lbl">
+            Fecha de Corte
+          </span>
+
+          <span class="val">
+
+            {{ selectedCard.cutOffDate }}
+
+          </span>
+
         </div>
+
       </div>
+
+
       <div class="date-item">
-        <ion-icon name="time-outline"></ion-icon>
+
+        <ion-icon
+          name="time-outline">
+        </ion-icon>
+
         <div>
-          <span class="lbl">Límite de Pago</span>
-          <span class="val highlight-date">{{ selectedCard.dueDate }}</span>
+
+          <span class="lbl">
+            Límite de Pago
+          </span>
+
+          <span class="val highlight-date">
+
+            {{ selectedCard.dueDate }}
+
+          </span>
+
         </div>
+
       </div>
+
+
     </div>
 
-    <!-- HISTORIAL DE TRANSACCIONES CON GESTO SWIPE INTEGRADO -->
+
+    <!-- =====================================================
+         MOVIMIENTOS RECIENTES
+         ===================================================== -->
+
     <div class="section-title">
-      <h3>Movimientos Recientes</h3>
-      <span class="link-btn">Ver Todos</span>
+
+      <h3>
+        Movimientos Recientes
+      </h3>
+
+      <span class="link-btn">
+        Ver Todos
+      </span>
+
     </div>
+
 
     <div class="transactions-container">
+
+
       @if (filteredTransactions.length === 0) {
+
         <div class="empty-state">
-          <p>No hay movimientos registrados para esta tarjeta en este período.</p>
+
+          <p>
+            No hay movimientos registrados
+            para esta tarjeta en este período.
+          </p>
+
         </div>
+
       }
 
-      <ion-list lines="none" style="background: transparent; padding: 0;">
-        @for (tx of filteredTransactions; track tx.id) {
-          <ion-item-sliding style="margin-bottom: 10px; border-radius: 12px; overflow: hidden;">
-            
-            <!-- TARJETA .tx-card -->
-            <ion-item lines="none" style="--background: transparent; --padding-start: 0; --inner-padding-end: 0;">
-              <div class="tx-card" style="width: 100%; margin: 0;">
-                <div class="tx-icon-box" [class.income]="tx.type === 'income'">
-                  <ion-icon [name]="tx.icon"></ion-icon>
+
+      <ion-list
+        lines="none"
+        style="
+          background: transparent;
+          padding: 0;
+        ">
+
+
+        @for (
+          tx of filteredTransactions;
+          track tx.id
+        ) {
+
+
+          <ion-item-sliding
+            style="
+              margin-bottom: 10px;
+              border-radius: 12px;
+              overflow: hidden;
+            ">
+
+
+            <!-- TARJETA DE MOVIMIENTO -->
+
+            <ion-item
+              lines="none"
+              style="
+                --background: transparent;
+                --padding-start: 0;
+                --inner-padding-end: 0;
+              ">
+
+
+              <div
+                class="tx-card"
+                style="
+                  width: 100%;
+                  margin: 0;
+                ">
+
+
+                <div
+                  class="tx-icon-box"
+                  [class.income]="tx.type === 'income'">
+
+                  <ion-icon
+                    [name]="tx.icon">
+                  </ion-icon>
+
                 </div>
+
+
                 <div class="tx-info">
-                  <h4 class="tx-title">{{ tx.title }}</h4>
-                  <span class="tx-subtitle">{{ tx.category }} • {{ tx.date }}</span>
+
+                  <h4 class="tx-title">
+
+                    {{ tx.title }}
+
+                  </h4>
+
+
+                  <span class="tx-subtitle">
+
+                    {{ tx.category }}
+
+                    •
+
+                    {{ tx.date }}
+
+                  </span>
+
                 </div>
-                <div class="tx-amount" [class.income]="tx.type === 'income'">
-                  {{ tx.type === 'income' ? '+' : '-' }}${{ tx.amount | number:'1.2-2' }}
+
+
+                <div
+                  class="tx-amount"
+                  [class.income]="tx.type === 'income'">
+
+                  {{
+                    tx.type === 'income'
+                      ? '+'
+                      : '-'
+                  }}
+
+                  ${{ tx.amount | number:'1.2-2' }}
+
                 </div>
+
+
               </div>
+
+
             </ion-item>
 
-            <!-- OPCIONES REQUERIDAS AL DESLIZAR (SWIPE) -->
-            <ion-item-options side="end">
-              <ion-item-option color="primary" (click)="verRecibo(tx)">
-                <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+
+            <!-- OPCIONES AL DESLIZAR -->
+
+            <ion-item-options
+              side="end">
+
+
+              <ion-item-option
+                color="primary"
+                (click)="verRecibo(tx)">
+
+                <ion-icon
+                  slot="icon-only"
+                  name="eye-outline">
+                </ion-icon>
+
               </ion-item-option>
-              <ion-item-option color="danger" (click)="reportarMovimiento(tx)">
-                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+
+
+              <ion-item-option
+                color="danger"
+                (click)="reportarMovimiento(tx)">
+
+                <ion-icon
+                  slot="icon-only"
+                  name="trash-outline">
+                </ion-icon>
+
               </ion-item-option>
+
+
             </ion-item-options>
 
+
           </ion-item-sliding>
+
         }
+
+
       </ion-list>
+
+
     </div>
-  <!-- SERVICIOS WEB -->
-  <ion-card class="web-service-card" style="margin: 20px 0; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
-    <ion-card-header>
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <ion-icon name="globe-outline" color="primary" style="font-size: 26px;"></ion-icon>
-        <div>
-          <ion-card-title style="font-size: 18px; font-weight: bold;">Servicios Web</ion-card-title>
-          <ion-card-subtitle style="font-size: 13px;">Consumo de API REST mediante HttpClient</ion-card-subtitle>
+
+
+    <!-- =====================================================
+         SERVICIOS WEB
+         ===================================================== -->
+
+    <ion-card
+      class="web-service-card">
+
+
+      <ion-card-header>
+
+
+        <div
+          class="web-service-header">
+
+
+          <ion-icon
+            name="globe-outline"
+            color="primary">
+          </ion-icon>
+
+
+          <div>
+
+            <ion-card-title>
+
+              Servicios Web
+
+            </ion-card-title>
+
+
+            <ion-card-subtitle>
+
+              Consumo de API REST mediante HttpClient
+
+            </ion-card-subtitle>
+
+          </div>
+
+
         </div>
-      </div>
-    </ion-card-header>
 
-    <ion-card-content>
-      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 5px;">
 
-        <!-- Botón GET -->
-        <ion-button expand="block" mode="ios" (click)="cargarDatosAPI()" [disabled]="cargandoApi">
-          <ion-icon slot="start" name="cloud-download-outline"></ion-icon>
-          GET
-        </ion-button>
+      </ion-card-header>
 
-        <!-- Botón POST -->
-        <ion-button expand="block" mode="ios" color="secondary" (click)="probarPOST()" [disabled]="cargandoApi">
-          <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
-           POST
-        </ion-button>
 
-        <!-- Indicador de carga estilizado -->
-        @if (cargandoApi) {
-        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; color: var(--ion-color-medium);">
-          <ion-spinner name="crescent"></ion-spinner>
-          <span style="font-size: 14px; font-weight: 500;">Procesando petición...</span>
+      <ion-card-content>
+
+
+        <div class="web-service-actions">
+
+
+          <!-- =================================================
+               GET
+               ================================================= -->
+
+          <ion-button
+            expand="block"
+            mode="ios"
+            (click)="cargarDatosAPI()"
+            [disabled]="cargandoApi">
+
+
+            <ion-icon
+              slot="start"
+              name="cloud-download-outline">
+            </ion-icon>
+
+
+            GET
+
+
+          </ion-button>
+
+
+          <!-- =================================================
+               POST
+               ================================================= -->
+
+          <ion-button
+            expand="block"
+            mode="ios"
+            color="secondary"
+            (click)="probarPOST()"
+            [disabled]="cargandoApi">
+
+
+            <ion-icon
+              slot="start"
+              name="cloud-upload-outline">
+            </ion-icon>
+
+
+            POST
+
+
+          </ion-button>
+
+
+          <!-- =================================================
+               PROCESANDO
+               ================================================= -->
+
+          @if (cargandoApi) {
+
+            <div class="api-loading">
+
+
+              <ion-spinner
+                name="crescent">
+              </ion-spinner>
+
+
+              <span>
+
+                Procesando petición...
+
+              </span>
+
+
+            </div>
+
+          }
+
+
         </div>
+
+
+      </ion-card-content>
+
+
+    </ion-card>
+
+
+    <!-- =====================================================
+         RESULTADOS DEL GET
+         ===================================================== -->
+
+    @if (publicacionesApi.length > 0) {
+
+
+      <div class="api-results">
+
+
+        <h3>
+
+          Datos recibidos por GET
+
+        </h3>
+
+
+        @for (
+          publicacion of publicacionesApi;
+          track publicacion.id
+        ) {
+
+
+          <div class="api-result-item">
+
+
+            <strong>
+
+              #{{ publicacion.id }}
+
+              {{ publicacion.title }}
+
+            </strong>
+
+
+            <p>
+
+              {{ publicacion.body }}
+
+            </p>
+
+
+          </div>
+
+
         }
+
+
       </div>
-    </ion-card-content>
-  </ion-card>
+
+
+    }
+
+
+    <!-- =====================================================
+         RESULTADO DEL POST
+         ===================================================== -->
+
+    @if (publicacionCreada) {
+
+
+      <div class="api-post-result">
+
+
+        <h3>
+
+          Respuesta del POST
+
+        </h3>
+
+
+        <p>
+
+          <strong>
+            ID:
+          </strong>
+
+          {{ publicacionCreada.id }}
+
+        </p>
+
+
+        <p>
+
+          <strong>
+            Título:
+          </strong>
+
+          {{ publicacionCreada.title }}
+
+        </p>
+
+
+        <p>
+
+          <strong>
+            Contenido:
+          </strong>
+
+          {{ publicacionCreada.body }}
+
+        </p>
+
+
+      </div>
+
+
+    }
+
+
+    <!-- =====================================================
+         ERROR
+         ===================================================== -->
+
+    @if (errorApi) {
+
+
+      <div class="api-error">
+
+        {{ errorApi }}
+
+      </div>
+
+
+    }
+
+
   </div>
+
+
 </ion-content>

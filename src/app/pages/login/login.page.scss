@@ -167,4 +167,28 @@ ion-content.custom-content {
     text-decoration: underline;
     cursor: pointer;
   }
+
+  /* =========================================================
+   MENSAJES DE ERROR DEL LOGIN Y REGISTRO
+   ========================================================= */
+
+.login-error {
+  margin: 12px 0;
+
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  background: #fee2e2;
+
+  border: 1px solid #fecaca;
+
+  color: #b91c1c;
+
+  font-size: 0.85rem;
+
+  font-weight: 600;
+
+  text-align: center;
+}
 }

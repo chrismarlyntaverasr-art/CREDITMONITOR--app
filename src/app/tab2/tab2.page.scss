@@ -1,225 +1,652 @@
 :host {
   display: block;
+  height: 100%;
+  width: 100%;
 }
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 ion-header {
   box-shadow: none;
 
   ion-toolbar.custom-toolbar {
+
     --background: #ffffff;
+
     --color: #0f172a;
+
     --border-color: #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 8px 12px;
+
+    border-bottom:
+      1px solid #e2e8f0;
+
+    padding:
+      8px 12px;
+
   }
 }
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
 
 .brand-header {
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   width: 100%;
+
 }
+
 
 .brand-logo {
+
   display: flex;
+
   align-items: center;
+
   gap: 6px;
 
+
   ion-icon {
-    font-size: 1.4rem;
-    color: #2563eb;
+
+    font-size:
+      1.4rem;
+
+    color:
+      #2563eb;
+
   }
+
 }
+
 
 .brand-name {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #0f172a;
-  letter-spacing: -0.4px;
+
+  font-size:
+    1.05rem;
+
+  font-weight:
+    800;
+
+  color:
+    #0f172a;
+
+  letter-spacing:
+    -0.4px;
+
 
   span {
-    color: #2563eb;
+
+    color:
+      #2563eb;
+
   }
+
 }
+
 
 .page-title {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #64748b;
-  background: #f1f5f9;
-  padding: 4px 12px;
-  border-radius: 20px;
+
+  margin:
+    0;
+
+  font-size:
+    0.95rem;
+
+  font-weight:
+    700;
+
+  color:
+    #64748b;
+
+  background:
+    #f1f5f9;
+
+  padding:
+    4px 12px;
+
+  border-radius:
+    20px;
+
 }
 
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
+
 ion-content {
-  --background: #f4f7fa;
+
+  --background:
+    #f4f7fa;
+
 }
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
 
 .total-summary-card,
 .form-card,
 .empty-card,
 .evidence-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-radius:
+    16px;
+
+  box-shadow:
+    0 4px 15px
+    rgba(15, 23, 42, 0.04);
+
 }
+
+
+/* =========================================================
+   RESUMEN
+   ========================================================= */
 
 .total-summary-card {
-  margin: 0.8rem 0 1rem;
+
+  margin:
+    0.8rem 0 1rem;
+
 
   .summary-label {
-    margin: 0;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #64748b;
+
+    margin:
+      0;
+
+    font-size:
+      0.85rem;
+
+    font-weight:
+      600;
+
+    color:
+      #64748b;
+
   }
+
 
   .summary-amount {
-    margin: 6px 0 2px;
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: #0f172a;
+
+    margin:
+      6px 0 2px;
+
+    font-size:
+      1.8rem;
+
+    font-weight:
+      900;
+
+    color:
+      #0f172a;
+
   }
+
 
   .summary-secondary {
-    margin: 0;
-    color: #64748b;
-    font-size: 0.82rem;
+
+    margin:
+      0;
+
+    color:
+      #64748b;
+
+    font-size:
+      0.82rem;
+
   }
+
 }
+
+
+/* =========================================================
+   BOTÓN AGREGAR
+   ========================================================= */
 
 .add-button {
-  margin-bottom: 1rem;
+
+  margin-bottom:
+    1rem;
+
 }
+
+
+/* =========================================================
+   FORMULARIO
+   ========================================================= */
 
 .form-card {
-  margin: 0 0 1rem;
+
+  margin:
+    0 0 1rem;
+
 
   ion-card-title {
-    font-weight: 800;
-    color: #0f172a;
+
+    font-weight:
+      800;
+
+    color:
+      #0f172a;
+
   }
+
 
   ion-card-subtitle {
-    color: #64748b;
+
+    color:
+      #64748b;
+
   }
+
+
+  ion-card-content {
+
+    padding-top:
+      4px;
+
+  }
+
 
   ion-item {
-    --background: transparent;
-  }
-}
 
-.form-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 16px;
-}
+    --background:
+      transparent;
 
-.section-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1.2rem 0 0.6rem;
+    --color:
+      #0f172a;
 
-  h2 {
-    margin: 0;
-    color: #0f172a;
-    font-size: 1rem;
-    font-weight: 800;
+    --inner-border-width:
+      0 0 1px 0;
+
+    --border-color:
+      #e2e8f0;
+
+    --min-height:
+      58px;
+
   }
 
-  p {
-    margin: 2px 0 0;
-    color: #64748b;
-    font-size: 0.78rem;
-  }
-}
-
-.debt-list {
-  background: transparent;
-  padding: 0;
-}
-
-.debt-item {
-  --background: #ffffff;
-  --padding-start: 14px;
-  --inner-padding-end: 12px;
-  margin-bottom: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  overflow: hidden;
-
-  > ion-icon {
-    font-size: 1.35rem;
-    margin-right: 12px;
-  }
 
   ion-label {
-    h2 {
-      margin-bottom: 4px;
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #0f172a;
-    }
 
-    p {
-      margin: 2px 0;
-      font-size: 0.78rem;
-      color: #64748b;
-    }
+    color:
+      #334155;
+
   }
 
-  ion-note {
-    font-weight: 800;
-    font-size: 0.86rem;
+
+  /*
+   * Muy importante para el teléfono:
+   * aseguramos que los campos puedan
+   * recibir el toque.
+   */
+
+  ion-input {
+
+    pointer-events:
+      auto;
+
+    display:
+      block;
+
+    width:
+      100%;
+
+    --color:
+      #0f172a;
+
+    --placeholder-color:
+      #94a3b8;
+
+    --placeholder-opacity:
+      1;
+
+    --padding-top:
+      8px;
+
+    --padding-bottom:
+      8px;
+
+    --padding-start:
+      0;
+
+    --padding-end:
+      0;
+
   }
+
+
+  ion-select {
+
+    width:
+      100%;
+
+    color:
+      #0f172a;
+
+  }
+
 }
 
-.empty-card {
-  ion-icon {
-    font-size: 2.4rem;
-    color: #64748b;
-  }
+
+/* =========================================================
+   BOTONES DEL FORMULARIO
+   ========================================================= */
+
+.form-actions {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    10px;
+
+  margin-top:
+    16px;
+
+}
+
+
+.form-actions ion-button {
+
+  margin:
+    0;
+
+}
+
+
+/* =========================================================
+   TÍTULO DE SECCIÓN
+   ========================================================= */
+
+.section-heading {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  margin:
+    1.2rem 0 0.6rem;
+
 
   h2 {
-    margin: 8px 0 4px;
-    color: #0f172a;
+
+    margin:
+      0;
+
+    color:
+      #0f172a;
+
+    font-size:
+      1rem;
+
+    font-weight:
+      800;
+
   }
 
+
   p {
-    margin: 0;
-    color: #64748b;
+
+    margin:
+      2px 0 0;
+
+    color:
+      #64748b;
+
+    font-size:
+      0.78rem;
+
   }
+
 }
+
+
+/* =========================================================
+   LISTA
+   ========================================================= */
+
+.debt-list {
+
+  background:
+    transparent;
+
+  padding:
+    0;
+
+}
+
+
+.debt-item {
+
+  --background:
+    #ffffff;
+
+  --padding-start:
+    14px;
+
+  --inner-padding-end:
+    12px;
+
+  margin-bottom:
+    10px;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-radius:
+    14px;
+
+  overflow:
+    hidden;
+
+
+  > ion-icon {
+
+    font-size:
+      1.35rem;
+
+    margin-right:
+      12px;
+
+  }
+
+
+  ion-label {
+
+
+    h2 {
+
+      margin-bottom:
+        4px;
+
+      font-size:
+        0.95rem;
+
+      font-weight:
+        800;
+
+      color:
+        #0f172a;
+
+    }
+
+
+    p {
+
+      margin:
+        2px 0;
+
+      font-size:
+        0.78rem;
+
+      color:
+        #64748b;
+
+    }
+
+  }
+
+
+  ion-note {
+
+    font-weight:
+      800;
+
+    font-size:
+      0.86rem;
+
+  }
+
+}
+
+
+/* =========================================================
+   SIN DEUDAS
+   ========================================================= */
+
+.empty-card {
+
+
+  ion-icon {
+
+    font-size:
+      2.4rem;
+
+    color:
+      #64748b;
+
+  }
+
+
+  h2 {
+
+    margin:
+      8px 0 4px;
+
+    color:
+      #0f172a;
+
+  }
+
+
+  p {
+
+    margin:
+      0;
+
+    color:
+      #64748b;
+
+  }
+
+}
+
+
+/* =========================================================
+   INFORMACIÓN DEL MÓDULO
+   ========================================================= */
 
 .evidence-card {
-  margin: 1rem 0 5rem;
-  border-left: 4px solid #2563eb;
+
+  margin:
+    1rem 0 5rem;
+
+  border-left:
+    4px solid #2563eb;
+
 
   h3 {
-    margin: 0 0 6px;
-    color: #0f172a;
-    font-size: 0.95rem;
+
+    margin:
+      0 0 6px;
+
+    color:
+      #0f172a;
+
+    font-size:
+      0.95rem;
+
   }
+
 
   p {
-    margin: 0;
-    color: #64748b;
-    font-size: 0.82rem;
-    line-height: 1.45;
+
+    margin:
+      0;
+
+    color:
+      #64748b;
+
+    font-size:
+      0.82rem;
+
+    line-height:
+      1.45;
+
   }
+
 }
 
+
+/* =========================================================
+   MÓVILES PEQUEÑOS
+   ========================================================= */
+
 @media (max-width: 380px) {
+
   .form-actions {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
+
   }
 
+
   .page-title {
-    font-size: 0.8rem;
+
+    font-size:
+      0.8rem;
+
   }
+
+
+  .form-card {
+
+    ion-card-content {
+
+      padding:
+        10px;
+
+    }
+
+  }
+
 }

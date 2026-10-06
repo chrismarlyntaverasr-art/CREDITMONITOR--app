@@ -1,49 +1,89 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Perfil de Usuario</ion-title>
+
+    <ion-title>
+      Perfil de Usuario
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content class="ion-padding">
 
-  <!-- FOTO DE PERFIL -->
+
+  <!-- =====================================================
+       FOTO DE PERFIL
+       ===================================================== -->
+
   <div class="profile-photo-section">
 
     @if (fotoPerfil) {
+
       <img
         [src]="fotoPerfil"
         alt="Foto de perfil"
-        class="profile-photo">
+        class="profile-photo"
+      />
+
     } @else {
+
       <div class="profile-photo-placeholder">
-        <ion-icon name="person-outline"></ion-icon>
+
+        <ion-icon
+          name="person-outline">
+        </ion-icon>
+
       </div>
+
     }
+
+
+    <!-- Botón cambiar foto -->
 
     <ion-button
       fill="outline"
       size="small"
-      (click)="tomarFotoPerfil()">
+      type="button"
+      (click)="seleccionarFoto()">
 
       <ion-icon
         name="camera-outline"
         slot="start">
       </ion-icon>
 
-      Cambiar foto
+      CAMBIAR FOTO
 
     </ion-button>
 
+
+    <!-- Selector de imagen oculto -->
+
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      class="hidden-file-input"
+      (change)="onFileSelected($event)"
+    />
+
   </div>
 
-  <!-- DATOS PERSONALES -->
+
+
+  <!-- =====================================================
+       DATOS PERSONALES
+       ===================================================== -->
+
   <ion-card>
 
     <ion-card-header>
 
       <ion-card-title>
 
-        <ion-icon name="person-outline"></ion-icon>
+        <ion-icon
+          name="person-outline">
+        </ion-icon>
 
         Datos Personales
 
@@ -51,7 +91,11 @@
 
     </ion-card-header>
 
+
     <ion-card-content>
+
+
+      <!-- Nombre -->
 
       <ion-item lines="full">
 
@@ -66,6 +110,9 @@
         </ion-input>
 
       </ion-item>
+
+
+      <!-- Correo -->
 
       <ion-item lines="full">
 
@@ -82,6 +129,9 @@
 
       </ion-item>
 
+
+      <!-- Teléfono -->
+
       <ion-item lines="full">
 
         <ion-label position="stacked">
@@ -97,6 +147,9 @@
 
       </ion-item>
 
+
+      <!-- Banco -->
+
       <ion-item lines="none">
 
         <ion-label position="stacked">
@@ -109,10 +162,16 @@
           interface="action-sheet"
           ngDefaultControl>
 
-          @for (bank of banks; track bank) {
+          @for (
+            bank of banks;
+            track bank
+          ) {
 
-            <ion-select-option [value]="bank">
+            <ion-select-option
+              [value]="bank">
+
               {{ bank }}
+
             </ion-select-option>
 
           }
@@ -121,17 +180,51 @@
 
       </ion-item>
 
+
+      <!-- Guardar cambios -->
+
       <ion-button
         expand="block"
         class="ion-margin-top"
+        type="button"
         (click)="saveProfile()">
 
-        Guardar Cambios
+        GUARDAR CAMBIOS
 
       </ion-button>
+
 
     </ion-card-content>
 
   </ion-card>
+
+
+
+  <!-- =====================================================
+       CERRAR SESIÓN
+       ===================================================== -->
+
+  <ion-button
+    expand="block"
+    color="danger"
+    fill="outline"
+    class="logout-button"
+    type="button"
+    (click)="cerrarSesion()">
+
+    <ion-icon
+      name="log-out-outline"
+      slot="start">
+    </ion-icon>
+
+    CERRAR SESIÓN
+
+  </ion-button>
+
+
+  <!-- Espacio inferior -->
+
+  <div class="profile-bottom-space"></div>
+
 
 </ion-content>

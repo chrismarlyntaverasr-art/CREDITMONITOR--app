@@ -1,64 +1,250 @@
 <ion-header>
+
   <ion-toolbar color="primary">
-    <ion-title>Salud Financiera</ion-title>
+
+    <ion-title>
+      Salud Financiera
+    </ion-title>
+
   </ion-toolbar>
+
 </ion-header>
 
+
 <ion-content class="ion-padding">
-  <!-- Puntuación principal -->
+
+
+  <!-- =====================================================
+       PUNTUACIÓN PRINCIPAL
+       ===================================================== -->
+
   <ion-card class="ion-text-center">
+
     <ion-card-header>
-      <ion-card-title>Puntaje de Salud</ion-card-title>
+
+      <ion-card-title>
+        Puntaje de Salud
+      </ion-card-title>
+
     </ion-card-header>
+
+
     <ion-card-content>
-      <div style="font-size: 3.5rem; font-weight: bold; color: #00e676;">
-        {{ healthScore }}<span style="font-size: 1.5rem; color: #777;">/100</span>
+
+      <div
+        style="
+          font-size: 3.5rem;
+          font-weight: bold;
+          color: #00e676;
+        "
+      >
+
+        {{ healthScore }}
+
+        <span
+          style="
+            font-size: 1.5rem;
+            color: #777;
+          "
+        >
+          /100
+        </span>
+
       </div>
-      <p style="color: #444;">Tu salud financiera se encuentra en nivel <strong>Saludable</strong>.</p>
+
+
+      <p style="color: #444;">
+
+        Tu salud financiera se encuentra en nivel
+        <strong>Saludable</strong>.
+
+      </p>
+
     </ion-card-content>
+
   </ion-card>
 
-  <!-- Métricas clave -->
+
+
+  <!-- =====================================================
+       MÉTRICAS CLAVE
+       ===================================================== -->
+
   <ion-card>
+
     <ion-card-header>
-      <ion-card-title>Métricas Clave</ion-card-title>
+
+      <ion-card-title>
+        Métricas Clave
+      </ion-card-title>
+
     </ion-card-header>
+
+
     <ion-card-content>
+
       <ion-item lines="full">
+
         <ion-label>
-          <h3>Nivel de Endeudamiento</h3>
-          <p>Recomendado: menos del 40%</p>
+
+          <h3>
+            Nivel de Endeudamiento
+          </h3>
+
+          <p>
+            Recomendado: menos del 40%
+          </p>
+
         </ion-label>
-        <ion-badge slot="end" color="success">{{ debtRatioPercentage }}%</ion-badge>
+
+
+        <ion-badge
+          slot="end"
+          color="success"
+        >
+          {{ debtRatioPercentage }}%
+        </ion-badge>
+
       </ion-item>
+
 
       <ion-item lines="none">
+
         <ion-label>
-          <h3>Historial de Pagos</h3>
-          <p>{{ paymentHistoryScore }}</p>
+
+          <h3>
+            Historial de Pagos
+          </h3>
+
+          <p>
+            {{ paymentHistoryScore }}
+          </p>
+
         </ion-label>
+
       </ion-item>
+
     </ion-card-content>
+
   </ion-card>
 
-  <!-- Uso del Crédito por Categoría con @for -->
+
+
+  <!-- =====================================================
+       USO DEL CRÉDITO
+       ===================================================== -->
+
   <ion-card>
+
     <ion-card-header>
-      <ion-card-title>¿En qué usas tu crédito?</ion-card-title>
+
+      <ion-card-title>
+        ¿En qué usas tu crédito?
+      </ion-card-title>
+
     </ion-card-header>
+
+
     <ion-card-content>
+
       <ion-list>
-        @for (cat of spendingCategories; track cat.category) {
+
+        @for (
+          cat of spendingCategories;
+          track cat.category
+        ) {
+
           <ion-item>
-            <ion-icon [name]="cat.icon" slot="start" [color]="cat.color"></ion-icon>
+
+            <ion-icon
+              [name]="cat.icon"
+              slot="start"
+              [color]="cat.color"
+            >
+            </ion-icon>
+
+
             <ion-label>
-              <h2>{{ cat.category }}</h2>
-              <p>RD$ {{ cat.amount | number:'1.2-2' }}</p>
+
+              <h2>
+                {{ cat.category }}
+              </h2>
+
+              <p>
+                RD$ {{ cat.amount | number:'1.2-2' }}
+              </p>
+
             </ion-label>
-            <ion-note slot="end" style="font-weight: bold;">{{ cat.percentage }}%</ion-note>
+
+
+            <ion-note
+              slot="end"
+              style="font-weight: bold;"
+            >
+              {{ cat.percentage }}%
+            </ion-note>
+
           </ion-item>
+
         }
+
       </ion-list>
+
     </ion-card-content>
+
   </ion-card>
+
+
+
+  <!-- =====================================================
+       MULTIMEDIA / PODCASTS
+       ===================================================== -->
+
+  <div class="podcast-section-title">
+    Aprende más
+  </div>
+
+
+  <div
+    class="podcast-card"
+    (click)="irAPodcasts()"
+  >
+
+    <div class="podcast-icon">
+
+      <ion-icon
+        name="headset-outline"
+      >
+      </ion-icon>
+
+    </div>
+
+
+    <div class="podcast-info">
+
+      <h3>
+        Podcasts educativos
+      </h3>
+
+      <span>
+        Escucha contenido sobre educación financiera
+      </span>
+
+    </div>
+
+
+    <ion-icon
+      name="chevron-forward-outline"
+      class="podcast-arrow"
+    >
+    </ion-icon>
+
+  </div>
+
+
+  <!-- Espacio inferior -->
+
+  <div style="height: 80px;"></div>
+
+
 </ion-content>

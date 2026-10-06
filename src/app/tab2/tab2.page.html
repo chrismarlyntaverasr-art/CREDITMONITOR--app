@@ -1,199 +1,650 @@
 <ion-header>
+
   <ion-toolbar class="custom-toolbar">
+
     <div class="brand-header">
+
       <div class="brand-logo">
-        <ion-icon name="wallet-outline"></ion-icon>
-        <span class="brand-name">Credit<span>Monitor</span></span>
+
+        <ion-icon
+          name="wallet-outline">
+        </ion-icon>
+
+        <span class="brand-name">
+          Credit<span>Monitor</span>
+        </span>
+
       </div>
-      <p class="page-title">Mis Deudas</p>
+
+      <p class="page-title">
+        Mis Deudas
+      </p>
+
     </div>
+
   </ion-toolbar>
+
 </ion-header>
 
+
 <ion-content class="ion-padding">
-  <ion-refresher slot="fixed" (ionRefresh)="refrescar($event)">
-    <ion-refresher-content pullingText="Desliza para actualizar"></ion-refresher-content>
+
+
+  <!-- =====================================================
+       ACTUALIZAR
+       ===================================================== -->
+
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="refrescar($event)">
+
+    <ion-refresher-content
+      pullingText="Desliza para actualizar">
+    </ion-refresher-content>
+
   </ion-refresher>
 
+
+  <!-- =====================================================
+       RESUMEN DE DEUDA
+       ===================================================== -->
+
   <ion-card class="total-summary-card">
+
     <ion-card-content>
-      <p class="summary-label">Deuda total registrada</p>
-      <h1 class="summary-amount">RD$ {{ totalDeuda | number:'1.2-2' }}</h1>
-      <p class="summary-secondary">
-        Cuotas mensuales: RD$ {{ totalCuotasMensuales | number:'1.2-2' }}
+
+      <p class="summary-label">
+        Deuda total registrada
       </p>
+
+      <h1 class="summary-amount">
+
+        RD$ {{ totalDeuda | number:'1.2-2' }}
+
+      </h1>
+
+      <p class="summary-secondary">
+
+        Cuotas mensuales:
+        RD$ {{ totalCuotasMensuales | number:'1.2-2' }}
+
+      </p>
+
     </ion-card-content>
+
   </ion-card>
+
+
+  <!-- =====================================================
+       BOTÓN AGREGAR DEUDA
+       ===================================================== -->
 
   <ion-button
     expand="block"
     shape="round"
     class="add-button"
+    type="button"
     (click)="nuevaDeuda()"
-    *ngIf="!mostrarFormulario"
-  >
-    <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+    *ngIf="!mostrarFormulario">
+
+    <ion-icon
+      name="add-circle-outline"
+      slot="start">
+    </ion-icon>
+
     Agregar deuda
+
   </ion-button>
 
-  <ion-card class="form-card" *ngIf="mostrarFormulario">
+
+  <!-- =====================================================
+       FORMULARIO NUEVA DEUDA
+       ===================================================== -->
+
+  <ion-card
+    class="form-card"
+    *ngIf="mostrarFormulario">
+
+
     <ion-card-header>
+
       <ion-card-title>
-        {{ editandoId ? 'Editar deuda' : 'Nueva deuda' }}
+
+        {{
+          editandoId
+            ? 'Editar deuda'
+            : 'Nueva deuda'
+        }}
+
       </ion-card-title>
+
+
       <ion-card-subtitle>
+
         Los datos se guardan localmente con Ionic Storage.
+
       </ion-card-subtitle>
+
     </ion-card-header>
 
+
     <ion-card-content>
+
+
+      <!-- =================================================
+           BANCO
+           ================================================= -->
+
       <ion-item>
-        <ion-label position="stacked">Banco o entidad</ion-label>
+
+        <ion-label position="stacked">
+          Banco o entidad
+        </ion-label>
+
+
         <ion-input
-          [(ngModel)]="formulario.banco"
+
+          type="text"
+
+          inputmode="text"
+
+          [value]="formulario.banco"
+
           name="banco"
+
           placeholder="Ej.: Banco Popular"
-          ngDefaultControl
-        ></ion-input>
+
+          autocomplete="off"
+
+          autocapitalize="words"
+
+          (ionInput)="actualizarBanco($event)">
+
+        </ion-input>
+
       </ion-item>
 
+
+      <!-- =================================================
+           TIPO DE DEUDA
+           ================================================= -->
+
       <ion-item>
-        <ion-label position="stacked">Tipo de deuda</ion-label>
+
+        <ion-label position="stacked">
+          Tipo de deuda
+        </ion-label>
+
+
         <ion-select
-          [(ngModel)]="formulario.tipo"
+
+          [value]="formulario.tipo"
+
           name="tipo"
-          interface="popover"
-          ngDefaultControl
-        >
-          <ion-select-option value="Prestamo">Préstamo</ion-select-option>
-          <ion-select-option value="Tarjeta">Tarjeta de crédito</ion-select-option>
+
+          interface="action-sheet"
+
+          (ionChange)="actualizarTipo($event)">
+
+          <ion-select-option
+            value="Prestamo">
+
+            Préstamo
+
+          </ion-select-option>
+
+
+          <ion-select-option
+            value="Tarjeta">
+
+            Tarjeta de crédito
+
+          </ion-select-option>
+
         </ion-select>
+
       </ion-item>
 
+
+      <!-- =================================================
+           DESCRIPCIÓN
+           ================================================= -->
+
       <ion-item>
-        <ion-label position="stacked">Descripción</ion-label>
+
+        <ion-label position="stacked">
+          Descripción
+        </ion-label>
+
+
         <ion-input
-          [(ngModel)]="formulario.descripcion"
+
+          type="text"
+
+          inputmode="text"
+
+          [value]="formulario.descripcion"
+
           name="descripcion"
+
           placeholder="Ej.: Préstamo personal"
-          ngDefaultControl
-        ></ion-input>
+
+          autocomplete="off"
+
+          autocapitalize="sentences"
+
+          (ionInput)="actualizarDescripcion($event)">
+
+        </ion-input>
+
       </ion-item>
 
+
+      <!-- =================================================
+           MONTO
+           ================================================= -->
+
       <ion-item>
-        <ion-label position="stacked">Balance pendiente (RD$)</ion-label>
+
+        <ion-label position="stacked">
+          Balance pendiente (RD$)
+        </ion-label>
+
+
         <ion-input
+
           type="number"
+
+          inputmode="decimal"
+
           min="0"
-          [(ngModel)]="formulario.monto"
+
+          [value]="formulario.monto ?? ''"
+
           name="monto"
+
           placeholder="0.00"
-          ngDefaultControl
-        ></ion-input>
+
+          (ionInput)="actualizarMonto($event)">
+
+        </ion-input>
+
       </ion-item>
+
+
+      <!-- =================================================
+           CUOTA MENSUAL
+           ================================================= -->
 
       <ion-item>
-        <ion-label position="stacked">Cuota mensual (RD$)</ion-label>
+
+        <ion-label position="stacked">
+          Cuota mensual (RD$)
+        </ion-label>
+
+
         <ion-input
+
           type="number"
+
+          inputmode="decimal"
+
           min="0"
-          [(ngModel)]="formulario.cuotaMensual"
+
+          [value]="formulario.cuotaMensual ?? ''"
+
           name="cuotaMensual"
+
           placeholder="0.00"
-          ngDefaultControl
-        ></ion-input>
+
+          (ionInput)="actualizarCuotaMensual($event)">
+
+        </ion-input>
+
       </ion-item>
 
-      <ion-item *ngIf="formulario.tipo === 'Tarjeta'">
-        <ion-label position="stacked">Últimos 4 dígitos</ion-label>
+
+      <!-- =================================================
+           ÚLTIMOS 4
+           ================================================= -->
+
+      <ion-item
+        *ngIf="formulario.tipo === 'Tarjeta'">
+
+        <ion-label position="stacked">
+          Últimos 4 dígitos
+        </ion-label>
+
+
         <ion-input
+
+          type="text"
+
           inputmode="numeric"
+
           maxlength="4"
-          [(ngModel)]="formulario.ultimos4"
+
+          [value]="formulario.ultimos4"
+
           name="ultimos4"
+
           placeholder="0000"
-          ngDefaultControl
-        ></ion-input>
+
+          (ionInput)="actualizarUltimos4($event)">
+
+        </ion-input>
+
       </ion-item>
+
+
+      <!-- =================================================
+           BOTONES
+           ================================================= -->
 
       <div class="form-actions">
-        <ion-button fill="outline" color="medium" (click)="cancelarEdicion()">
-          <ion-icon name="close-outline" slot="start"></ion-icon>
+
+
+        <ion-button
+
+          fill="outline"
+
+          color="medium"
+
+          type="button"
+
+          (click)="cancelarEdicion()">
+
+          <ion-icon
+            name="close-outline"
+            slot="start">
+          </ion-icon>
+
           Cancelar
+
         </ion-button>
 
-        <ion-button (click)="guardar()">
-          <ion-icon name="save-outline" slot="start"></ion-icon>
-          {{ editandoId ? 'Actualizar' : 'Guardar' }}
+
+        <ion-button
+
+          type="button"
+
+          (click)="guardar()">
+
+          <ion-icon
+            name="save-outline"
+            slot="start">
+          </ion-icon>
+
+          {{
+            editandoId
+              ? 'Actualizar'
+              : 'Guardar'
+          }}
+
         </ion-button>
+
+
       </div>
+
+
     </ion-card-content>
+
   </ion-card>
+
+
+  <!-- =====================================================
+       DEUDAS GUARDADAS
+       ===================================================== -->
 
   <div class="section-heading">
+
     <div>
-      <h2>Deudas guardadas</h2>
-      <p>{{ deudas.length }} registro(s) almacenado(s)</p>
+
+      <h2>
+        Deudas guardadas
+      </h2>
+
+      <p>
+
+        {{ deudas.length }}
+        registro(s) almacenado(s)
+
+      </p>
+
     </div>
+
   </div>
 
-  <ion-card class="empty-card" *ngIf="!cargando && deudas.length === 0">
-    <ion-card-content class="ion-text-center">
-      <ion-icon name="wallet-outline"></ion-icon>
-      <h2>No hay deudas registradas</h2>
-      <p>Agrega una deuda para comenzar a probar el CRUD.</p>
+
+  <!-- =====================================================
+       SIN DEUDAS
+       ===================================================== -->
+
+  <ion-card
+
+    class="empty-card"
+
+    *ngIf="
+      !cargando &&
+      deudas.length === 0
+    ">
+
+    <ion-card-content
+      class="ion-text-center">
+
+      <ion-icon
+        name="wallet-outline">
+      </ion-icon>
+
+      <h2>
+        No hay deudas registradas
+      </h2>
+
+      <p>
+        Agrega una deuda para comenzar a probar el CRUD.
+      </p>
+
     </ion-card-content>
+
   </ion-card>
 
-  <ion-list class="debt-list" *ngIf="deudas.length > 0">
-    @for (deuda of deudas; track deuda.id) {
+
+  <!-- =====================================================
+       LISTA DE DEUDAS
+       ===================================================== -->
+
+  <ion-list
+
+    class="debt-list"
+
+    *ngIf="deudas.length > 0">
+
+
+    @for (
+      deuda of deudas;
+      track deuda.id
+    ) {
+
+
       <ion-item-sliding>
-        <ion-item class="debt-item" lines="none">
+
+
+        <ion-item
+          class="debt-item"
+          lines="none">
+
+
           <ion-icon
-            [name]="deuda.tipo === 'Tarjeta' ? 'card-outline' : 'cash-outline'"
+
+            [name]="
+              deuda.tipo === 'Tarjeta'
+                ? 'card-outline'
+                : 'cash-outline'
+            "
+
             slot="start"
-            [color]="deuda.tipo === 'Tarjeta' ? 'primary' : 'warning'"
-          ></ion-icon>
+
+            [color]="
+              deuda.tipo === 'Tarjeta'
+                ? 'primary'
+                : 'warning'
+            ">
+
+          </ion-icon>
+
 
           <ion-label>
-            <h2>{{ deuda.descripcion }}</h2>
+
+
+            <h2>
+
+              {{ deuda.descripcion }}
+
+            </h2>
+
+
             <p>
-              <ion-icon name="business-outline"></ion-icon>
-              {{ deuda.banco }} · {{ deuda.tipo === 'Prestamo' ? 'Préstamo' : 'Tarjeta' }}
-              <span *ngIf="deuda.tipo === 'Tarjeta' && deuda.ultimos4">
+
+              <ion-icon
+                name="business-outline">
+              </ion-icon>
+
+              {{ deuda.banco }}
+
+              ·
+
+              {{
+                deuda.tipo === 'Prestamo'
+                  ? 'Préstamo'
+                  : 'Tarjeta'
+              }}
+
+
+              <span
+                *ngIf="
+                  deuda.tipo === 'Tarjeta' &&
+                  deuda.ultimos4
+                ">
+
                 · •••• {{ deuda.ultimos4 }}
+
               </span>
+
             </p>
-            <p *ngIf="deuda.cuotaMensual > 0">
-              Cuota: RD$ {{ deuda.cuotaMensual | number:'1.2-2' }}
+
+
+            <p
+              *ngIf="
+                deuda.cuotaMensual > 0
+              ">
+
+              Cuota:
+
+              RD$ {{
+                deuda.cuotaMensual
+                | number:'1.2-2'
+              }}
+
             </p>
+
+
           </ion-label>
 
-          <ion-note slot="end" color="danger">
-            RD$ {{ deuda.monto | number:'1.2-2' }}
+
+          <ion-note
+            slot="end"
+            color="danger">
+
+            RD$ {{
+              deuda.monto
+              | number:'1.2-2'
+            }}
+
           </ion-note>
+
+
         </ion-item>
 
-        <ion-item-options side="end">
-          <ion-item-option color="primary" (click)="editar(deuda)">
-            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+
+        <!-- =================================================
+             OPCIONES DESLIZANDO
+             ================================================= -->
+
+        <ion-item-options
+          side="end">
+
+
+          <ion-item-option
+
+            color="primary"
+
+            (click)="editar(deuda)">
+
+            <ion-icon
+
+              name="create-outline"
+
+              slot="icon-only">
+
+            </ion-icon>
+
           </ion-item-option>
-          <ion-item-option color="danger" (click)="confirmarEliminar(deuda)">
-            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+
+
+          <ion-item-option
+
+            color="danger"
+
+            (click)="confirmarEliminar(deuda)">
+
+            <ion-icon
+
+              name="trash-outline"
+
+              slot="icon-only">
+
+            </ion-icon>
+
           </ion-item-option>
+
+
         </ion-item-options>
+
+
       </ion-item-sliding>
+
+
     }
+
+
   </ion-list>
 
+
+  <!-- =====================================================
+       INFORMACIÓN DEL MÓDULO
+       ===================================================== -->
+
   <ion-card class="evidence-card">
+
     <ion-card-content>
-      <h3>Módulo U9 · Almacenamiento</h3>
+
+      <h3>
+        Módulo U9 · Almacenamiento
+      </h3>
+
+
       <p>
-        Esta pantalla implementa CRUD completo y persistencia local con
-        <strong>@ionic/storage-angular</strong>. Los registros permanecen guardados aunque
-        se cierre y se vuelva a abrir la aplicación.
+
+        Esta pantalla implementa CRUD completo y persistencia
+        local con <strong>@ionic/storage-angular</strong>.
+        Los registros permanecen guardados aunque se cierre
+        y se vuelva a abrir la aplicación.
+
       </p>
+
     </ion-card-content>
+
   </ion-card>
+
+
 </ion-content>
