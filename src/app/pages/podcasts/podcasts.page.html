@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/welcome"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Podcasts educativos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Episodios disponibles</ion-label>
+    </ion-list-header>
+
+    @for (p of podcasts; track p.id) {
+      <ion-item [color]="isCurrent(p) ? 'light' : undefined" button detail="false" (click)="player.toggle(p)">
+        <ion-icon name="musical-notes" slot="start"></ion-icon>
+        <ion-label>
+          <h2>{{ p.title }}</h2>
+          <p>{{ p.author }}</p>
+          <p>{{ p.description }}</p>
+        </ion-label>
+        <ion-icon slot="end" [name]="isPlayingNow(p) ? 'pause' : 'play'"></ion-icon>
+      </ion-item>
+    }
+  </ion-list>
+
+  @if (player.current(); as now) {
+    <div class="player">
+      <div class="player-title">
+        <strong>{{ now.title }}</strong>
+        <span>{{ now.author }}</span>
+      </div>
+
+      <ion-range
+        [min]="0"
+        [max]="player.duration() || 1"
+        [step]="1"
+        [value]="player.currentTime()"
+        (ionChange)="onSeek($event)"
+        aria-label="Progreso del audio"
+      >
+        <span slot="start">{{ fmt(player.currentTime()) }}</span>
+        <span slot="end">{{ fmt(player.duration()) }}</span>
+      </ion-range>
+
+      <div class="controls">
+        <ion-button fill="clear" (click)="player.stop()" aria-label="Detener">
+          <ion-icon slot="icon-only" name="stop"></ion-icon>
+        </ion-button>
+
+        <ion-button size="large" shape="round" (click)="player.toggle()" aria-label="Reproducir o pausar">
+          <ion-icon slot="icon-only" [name]="player.isPlaying() ? 'pause' : 'play'"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  }
+</ion-content>
