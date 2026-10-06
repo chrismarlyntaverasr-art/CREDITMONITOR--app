@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ApiPost, ApiService } from '../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastController, ModalController } from '@ionic/angular';
@@ -75,6 +76,7 @@ interface Transaction {
 export class Tab1Page implements OnInit, OnDestroy {
   private toastCtrl = inject(ToastController);
   private modalCtrl = inject(ModalController);
+  private readonly apiService = inject(ApiService);
 
   // --- ESTADO DE CONECTIVIDAD DE RED ---
   isOnline: boolean = navigator.onLine;
@@ -84,6 +86,10 @@ export class Tab1Page implements OnInit, OnDestroy {
   userName: string = 'Chrismarlyn';
   creditScore: number = 765;
   selectedPeriod: 'month' | 'quarter' | 'year' = 'month';
+  publicacionesApi: ApiPost[] = [];
+  cargandoApi = false;
+  errorApi = '';
+  publicacionCreada: ApiPost | null = null;
 
   cards: CreditCard[] = [
     {
@@ -162,6 +168,76 @@ export class Tab1Page implements OnInit, OnDestroy {
     window.addEventListener('offline', this.offlineHandler);
   }
 
+  async cargarDatosAPI() {
+    this.cargandoApi = true;
+    this.errorApi = '';
+
+    this.apiService.obtenerPublicaciones().subscribe({
+      next: async (respuesta) => {
+        this.publicacionesApi = respuesta.slice(0, 5);
+        this.cargandoApi = false;
+
+        // Mostrar aviso flotante de éxito
+        const toast = await this.toastCtrl.create({
+          message: `¡GET exitoso! Se cargaron ${this.publicacionesApi.length} publicaciones.`,
+          duration: 3000,
+          position: 'bottom',
+          color: 'success'
+        });
+        await toast.present();
+      },
+      error: async (error) => {
+        console.error('Error en GET:', error);
+        this.cargandoApi = false;
+
+        // Mostrar aviso flotante de error
+        const toast = await this.toastCtrl.create({
+          message: 'No se pudieron obtener los datos de la API.',
+          duration: 3000,
+          position: 'bottom',
+          color: 'danger'
+        });
+        await toast.present();
+      }
+    });
+  }
+
+  async probarPOST() {
+    this.cargandoApi = true;
+    const nuevaPublicacion = {
+      title: 'Nueva Publicación Ionic',
+      body: 'Contenido de prueba enviado mediante método POST.',
+      userId: 1
+    };
+
+    this.apiService.crearPublicacion(nuevaPublicacion).subscribe({
+      next: async (respuesta) => {
+        this.publicacionCreada = respuesta;
+        this.cargandoApi = false;
+
+        // Mostrar aviso flotante con los datos del POST
+        const toast = await this.toastCtrl.create({
+          message: `¡POST exitoso! Creado ID: ${respuesta.id} - "${respuesta.title}"`,
+          duration: 4000,
+          position: 'bottom',
+          color: 'tertiary'
+        });
+        await toast.present();
+      },
+      error: async (error) => {
+        console.error('Error en POST:', error);
+        this.cargandoApi = false;
+
+        const toast = await this.toastCtrl.create({
+          message: 'Error al enviar la publicación (POST).',
+          duration: 3000,
+          position: 'bottom',
+          color: 'danger'
+        });
+        await toast.present();
+      }
+    });
+  }
   ngOnDestroy() {
     // Limpieza de eventos
     window.removeEventListener('online', this.onlineHandler);
