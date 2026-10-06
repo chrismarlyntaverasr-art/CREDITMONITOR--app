@@ -265,6 +265,41 @@
         }
       </ion-list>
     </div>
+  <!-- SERVICIOS WEB -->
+  <ion-card class="web-service-card" style="margin: 20px 0; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+    <ion-card-header>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <ion-icon name="globe-outline" color="primary" style="font-size: 26px;"></ion-icon>
+        <div>
+          <ion-card-title style="font-size: 18px; font-weight: bold;">Servicios Web</ion-card-title>
+        </div>
+      </div>
+    </ion-card-header>
 
+    <ion-card-content>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 5px;">
+
+        <!-- Botón GET -->
+        <ion-button expand="block" mode="ios" (click)="cargarDatosAPI()" [disabled]="cargandoApi">
+          <ion-icon slot="start" name="cloud-download-outline"></ion-icon>
+          GET
+        </ion-button>
+
+        <!-- Botón POST -->
+        <ion-button expand="block" mode="ios" color="secondary" (click)="probarPOST()" [disabled]="cargandoApi">
+          <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+           POST
+        </ion-button>
+
+        <!-- Indicador de carga estilizado -->
+        @if (cargandoApi) {
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; color: var(--ion-color-medium);">
+          <ion-spinner name="crescent"></ion-spinner>
+          <span style="font-size: 14px; font-weight: 500;">Procesando petición...</span>
+        </div>
+        }
+      </div>
+    </ion-card-content>
+  </ion-card>
   </div>
 </ion-content>
