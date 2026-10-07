@@ -317,7 +317,7 @@ Complete los datos antes de entregar el repositorio.
 | Integrante | Matrícula | Módulo / responsabilidad |
 |---|---|---|
 | Héctor Ovalles Alonzo | 100046429 | Unidad 9 — Almacenamiento / CRUD con Ionic Storage |
-| Rossany __________________ | 100056457 | Unidad 7 — Multimedia |
+| Rossany Estevez Jerez | 100056457 | Unidad 7 — Multimedia |
 | Randy Marte | 100065891 | Unidad 8 — Cámara / QR |
 | Michel Carolina Fajardo Polanco | 100053908 | Unidad 10 — Servicios Web |
 | Chrismarlyn Taveras Ramos | 100074265 | Unidades 1–6 / módulo asignado |
