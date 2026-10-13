@@ -320,7 +320,7 @@ Complete los datos antes de entregar el repositorio.
 | Rossany Estevez Jerez | 100056457 | Unidad 7 — Multimedia |
 | Randy Marte | 100065891 | Unidad 8 — Cámara / QR |
 | Michel Carolina Fajardo Polanco | 100053908 | Unidad 10 — Servicios Web |
-| Chrismarlyn Taveras Ramos | 100074265 | Unidades 1–6 / módulo asignado |
+| Chrismarlyn Taveras Ramos | 100074265 | Unidades 1–6 / Interfaz-Navegación- Noticias |
 
 ---
 
